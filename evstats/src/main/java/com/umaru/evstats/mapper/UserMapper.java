@@ -1,7 +1,7 @@
 package com.umaru.evstats.mapper;
 
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.model.User;
+import com.umaru.evstats.entity.User;
 
 public class UserMapper {
     public static UserDto mapToUserDto(User user) {

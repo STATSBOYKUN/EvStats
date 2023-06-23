@@ -1,4 +1,3 @@
-
 package com.umaru.evstats.dto;
 
 import jakarta.validation.constraints.Email;
@@ -7,7 +6,6 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-
 
 @Getter
 @Setter
@@ -26,6 +24,15 @@ public class UserDto {
 
     @NotEmpty(message = "Please enter valid password.")
     private String password;
+
+    @NotEmpty(message = "Please enter valid provinsi.")
+    private String provinsi;
+
+    @NotEmpty(message = "Please enter valid pekerjaan.")
+    private String pekerjaan;
+
+    @NotEmpty(message = "Please enter valid umur.")
+    private Integer umur;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date createdAt;

@@ -1,37 +1,26 @@
-
 package com.umaru.evstats.controller;
 
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.model.User;
+import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@SessionAttributes("name")
 public class LoginController {
-    private String getLogedinUsername() {
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
-    }
-
     @Autowired
     private UserService userService;
 
     @RequestMapping("/login")
     public String loginForm(ModelMap model) {
-        String username = getLogedinUsername();
-
-        model.put("name", username);
         return "loginUser";
     }
 
@@ -61,4 +50,5 @@ public class LoginController {
         userService.saveUser(userDto);
         return "redirect:/registration?success";
     }
+
 }

@@ -1,11 +1,9 @@
-
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.model.User;
+import com.umaru.evstats.entity.User;
 
 import java.util.List;
-
 
 public interface UserService {
     void saveUser(UserDto userDto);

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Error - EvStats</title>
+    <link rel="icon" th:href="@{/img/icon/stis.png}">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/Raleway.css}">
+    <link rel="stylesheet" th:href="@{/css/Team-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/Team-images.css}">
+</head>
+
+<body>
+    <section class="py-5 mt-5" style="margin-top: 0px;padding-top: 0px;">
+        <div class="container">
+            <div class="row row-cols-1 d-flex justify-content-center align-items-center">
+                <div class="col-md-10 text-center"><img class="img-fluid w-75" th:src="@{/img/illustrations/404.svg}" width="809" height="610"></div>
+                <div class="col text-center">
+                    <h2 class="display-3 fw-bold mb-4">Halaman tidak ditemukan.</h2>
+                    <p class="fs-4 text-muted"></p>
+                    <a class="btn btn-primary shadow" role="button" th:href="@{/login}">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/startup-modern.js}"></script>
+</body>
+
+</html>

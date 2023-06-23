@@ -1,23 +1,21 @@
-
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.mapper.UserMapper;
-import com.umaru.evstats.model.Role;
-import com.umaru.evstats.model.User;
+import com.umaru.evstats.entity.Role;
+import com.umaru.evstats.entity.User;
 import com.umaru.evstats.repository.RoleRepository;
 import com.umaru.evstats.repository.UserRepository;
 import com.umaru.evstats.util.TbConstants;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.umaru.evstats.mapper.UserMapper.mapToUserDto;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.umaru.evstats.mapper.UserMapper.mapToUserDto;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,9 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public void saveUser(UserDto userDto) {
@@ -41,7 +36,7 @@ public class UserServiceImpl implements UserService {
         user = new User(
                 userDto.getName(),
                 userDto.getEmail(),
-                passwordEncoder.encode(userDto.getPassword()),
+                userDto.getPassword(),
                 Arrays.asList(role)
         );
         userRepository.save(user);

@@ -1,10 +1,6 @@
-
 package com.umaru.evstats.controller;
 
-import com.umaru.evstats.model.User;
-import com.umaru.evstats.service.BookService;
-import com.umaru.evstats.service.PeminjamanService;
-import com.umaru.evstats.service.PengembalianService;
+import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,19 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
 @Controller
 @SessionAttributes("name")
 @RequestMapping("/user/")
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    PeminjamanService peminjamanService;
-    @Autowired
-    BookService bookService;
-    @Autowired
-    PengembalianService pengembalianService;
 
     private String getLogedinUsername() {
         Authentication authentication =
@@ -39,7 +28,6 @@ public class UserController {
     public String registrationForm(ModelMap model) {
         User user = userService.findUserByEmail(getLogedinUsername());
             model.put("user", user);
-            model.addAttribute("peminjamans", pengembalianService.getPeminjamanUser(user.getId()));
             return "user";
     }
 }
