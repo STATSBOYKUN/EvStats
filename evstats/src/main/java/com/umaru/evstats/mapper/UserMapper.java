@@ -10,6 +10,9 @@ public class UserMapper {
                 .name(user.getName())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .provinsi(user.getProvinsi())
+                .pekerjaan(user.getPekerjaan())
+                .umur(user.getUmur())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();
@@ -21,6 +24,9 @@ public class UserMapper {
                 .name(userDto.getName())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
+                .provinsi(userDto.getProvinsi())
+                .pekerjaan(userDto.getPekerjaan())
+                .umur(userDto.getUmur())
                 .createdAt(userDto.getCreatedAt())
                 .updatedAt(userDto.getUpdatedAt())
                 .build();

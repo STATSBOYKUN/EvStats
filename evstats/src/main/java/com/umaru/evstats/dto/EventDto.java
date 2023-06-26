@@ -12,30 +12,27 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+
+public class EventDto {
     private Long id;
 
     @NotEmpty(message = "Please enter valid name.")
-    private String username;
+    private String name;
 
     @NotEmpty(message = "Please enter valid email.")
     @Email
     private String email;
 
-    @NotEmpty(message = "Please enter valid password.")
-    private String password;
+    @NotEmpty(message = "Please enter valid invoices.")
+    private String invoices;
 
     @NotEmpty(message = "Please enter valid provinsi.")
-    private String provinsi;
-
-    @NotEmpty(message = "Please enter valid pekerjaan.")
-    private String pekerjaan;
-
-    @NotEmpty(message = "Please enter valid umur.")
-    private Integer umur;
+    private Integer tickets;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date createdAt;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date updatedAt;
+    private Date date;
+
+    @NotEmpty(message = "Please enter valid status.")
+    private String status;
+
 }
