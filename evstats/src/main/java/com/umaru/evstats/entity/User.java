@@ -23,7 +23,7 @@ public class User {
     private Long id;
     
     @Column(nullable = false)
-    private String name;
+    private String username;
     
     @Column(nullable = false, unique = true)
     private String email;
@@ -58,8 +58,8 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public User(String name, String email, String password, List<Role> roles) {
-        this.name = name;
+    public User(String username, String email, String password, List<Role> roles) {
+        this.username = username;
         this.email = email;
         this.password = password;
         if (roles != null) {

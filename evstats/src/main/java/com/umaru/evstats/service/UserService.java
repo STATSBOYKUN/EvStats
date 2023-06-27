@@ -11,7 +11,7 @@ public interface UserService {
     User findUserByEmail(String email);
     UserDto findUserDtoByEmail(String email);
 
-    User findUserByName(String name);
+    User findUserByUsername(String username);
     public List<UserDto> getUsers();
     public List<UserDto> getUsersUser();
 

@@ -36,6 +36,7 @@ public class UserDto {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date createdAt;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date updatedAt;
 }

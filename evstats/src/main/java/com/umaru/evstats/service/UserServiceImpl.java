@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         User user;
         user = new User(
-                userDto.getName(),
+                userDto.getUsername(),
                 userDto.getEmail(),
                 userDto.getPassword(),
                 Arrays.asList(role)
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByName(String name) {
-        return userRepository.findByName(name);
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

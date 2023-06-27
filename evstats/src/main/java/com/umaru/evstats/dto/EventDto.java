@@ -1,8 +1,10 @@
 package com.umaru.evstats.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -16,23 +18,21 @@ import java.util.Date;
 public class EventDto {
     private Long id;
 
-    @NotEmpty(message = "Please enter valid name.")
+    @NotEmpty(message = "Please enter valid event name.")
     private String name;
 
-    @NotEmpty(message = "Please enter valid email.")
-    @Email
-    private String email;
+    @NotEmpty(message = "Please enter valid event details.")
+    private String details;
 
-    @NotEmpty(message = "Please enter valid invoices.")
-    private String invoices;
+    @NotEmpty(message = "Please enter valid event person.")
+    private String person;
 
-    @NotEmpty(message = "Please enter valid provinsi.")
-    private Integer tickets;
+    private String additionalDetails;
 
+    @NotEmpty(message = "PLease enter valid event place")
+    private String place;
+
+    @NotEmpty(message = "Please enter valid event date.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
-
-    @NotEmpty(message = "Please enter valid status.")
-    private String status;
-
 }

@@ -7,9 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tickets")
+@Table(name = "events")
 
 public class Event {
     @Id
@@ -28,19 +26,19 @@ public class Event {
     private String name;
 
     @Column(nullable = false)
-    private String email;
+    private String details;
 
     @Column(nullable = false)
-    private String invoices;
+    private String person;
 
     @Column(nullable = false)
-    private Integer tickets;
+    private String additionalDetails;
+
+    @Column(nullable = false)
+    private String place;
 
     @Column(nullable = false)
     @UpdateTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
-
-    @Column(nullable = false)
-    private String status;
 }
