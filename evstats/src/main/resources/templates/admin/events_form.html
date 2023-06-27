@@ -1,0 +1,41 @@
+
+<form method="post" data-bs-theme="light" th:object='${event}' th:action="@{/admin/events/create}">
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Nama Events</h6>
+        <input th:field='${event.name}' class="form-control" type="text" name="name">
+        <input th:field='${event.id}' type="hidden" id="id" name="id">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Thumbnails</h6>
+        <textarea th:field='${event.thumbnails}'  class="form-control" maxlength="200" name="thumbnails" ></textarea>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Details</h6>
+        <textarea th:field='${event.details}' class="form-control" maxlength="2000" rows="8" name="details"></textarea>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Pembicara (pisahkan dengan ",")</h6>
+        <input th:field='${event.person}' class="form-control" type="text" name="person">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Tanggal</h6>
+        <input th:field='${event.date}' class="form-control" type="date" name="date">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Waktu</h6>
+        <input th:field='${event.time}' class="form-control" type="time" name="time">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Tempat</h6>
+        <input th:field='${event.place}' class="form-control" type="text" name="place">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Harga Tiket (Rupiah)</h6>
+        <input th:field='${event.price}' class="form-control" type="number" name="price">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Informasi Tambahan</h6>
+        <textarea th:field='${event.additionalDetails}' class="form-control" maxlength="500" name="additionalDetails"></textarea>
+    </div>
+    <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Buat</button></div>
+</form>

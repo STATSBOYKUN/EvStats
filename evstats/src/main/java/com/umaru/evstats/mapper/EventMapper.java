@@ -8,11 +8,14 @@ public class EventMapper {
         EventDto eventDto = EventDto.builder()
                 .id(event.getId())
                 .name(event.getName())
+                .thumbnails(event.getThumbnails())
                 .details(event.getDetails())
                 .person(event.getPerson())
                 .additionalDetails(event.getAdditionalDetails())
                 .date(event.getDate())
+                .time(event.getTime())
                 .place(event.getPlace())
+                .price(event.getPrice())
                 .build();
         return eventDto;
     }
@@ -20,11 +23,14 @@ public class EventMapper {
         Event event = Event.builder()
                 .id(eventDto.getId())
                 .name(eventDto.getName())
+                .thumbnails(eventDto.getThumbnails())
                 .details(eventDto.getDetails())
                 .person(eventDto.getPerson())
                 .additionalDetails(eventDto.getAdditionalDetails())
                 .date(eventDto.getDate())
+                .time(eventDto.getTime())
                 .place(eventDto.getPlace())
+                .price(eventDto.getPrice())
                 .build();
         return event;
     }

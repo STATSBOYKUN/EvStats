@@ -7,6 +7,10 @@ import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -21,6 +25,9 @@ public class EventDto {
     @NotEmpty(message = "Please enter valid event name.")
     private String name;
 
+    @NotEmpty(message = "Please enter valid event thumbnails.")
+    private String thumbnails;
+
     @NotEmpty(message = "Please enter valid event details.")
     private String details;
 
@@ -34,5 +41,11 @@ public class EventDto {
 
     @NotEmpty(message = "Please enter valid event date.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date date;
+    private LocalDate date;
+
+    @NotEmpty(message = "Please enter valid event time.")
+    private LocalTime time;
+
+    @NotEmpty(message = "Please enter valid event ticket price.")
+    private Integer price;
 }
