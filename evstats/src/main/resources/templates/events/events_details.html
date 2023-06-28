@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/events}">Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/events}">Events</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/komunitas}">Komunitas</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/bantuan}">Bantuan</a></li>
                 </ul>
@@ -106,15 +106,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-xl-1">
+                <div style="padding-top: 15px;" class="col-md-6 col-xl-1">
                     <div></div><i class="icon ion-ios-calendar-outline" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i>
                 </div>
-                <div style="padding-top: 15px;" class="col-md-6 col-xl-5">
+                <div class="col-md-6 col-xl-5">
                     <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tanggal</span></h5>
                     <p class="text-muted" th:text="${event.date}"></p>
                 </div>
-                <div class="col-xl-1"><i class="icon ion-map" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i></div>
-                <div style="padding-top: 15px;" class="col-xl-5">
+                <div style="padding-top: 15px;" class="col-xl-1"><i class="icon ion-map" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i></div>
+                <div class="col-xl-5">
                     <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tempat</span></h5>
                     <p class="text-muted" th:text="${event.place}"></p>
                 </div>

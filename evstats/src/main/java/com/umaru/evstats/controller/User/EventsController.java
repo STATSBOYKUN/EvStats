@@ -1,7 +1,9 @@
 package com.umaru.evstats.controller.User;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.service.EventService;
+import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ import java.util.List;
 public class EventsController {
     @Autowired
     private EventService eventsService;
+
+    @Autowired
+    private UserService usersService;
 
     @GetMapping("/events/{eventId}")
     public String events(Model model, @PathVariable Long eventId){
@@ -33,6 +38,7 @@ public class EventsController {
     @GetMapping("/events/tickets/{eventId}")
     public String events_tickets(Model model, @PathVariable Long eventId){
         EventDto event = eventsService.getEvent(eventId);
+        model.addAttribute("ticket", new TicketDto());
         model.addAttribute("event", event);
         return "/admin/tickets/tickets_create";
     }

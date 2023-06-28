@@ -16,14 +16,15 @@
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: var(--bs-primary-text-emphasis);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-icon"><img style="width: 40px; height: auto" th:src="@{/img/icon/stis.png}"></div>
                     <div class="sidebar-brand-text mx-3"><span>EvStats</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/admin/users}"><i class="fas fa-table"></i><span>Users</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/admin/tickets}"><i class="fas fa-ticket-alt"></i><span>Tickets</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/admin/tickets}"><i class="fas fa-ticket-alt"></i><span>Tickets</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/admin/events}"><i class="fas fa-swatchbook"></i><span>Events</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

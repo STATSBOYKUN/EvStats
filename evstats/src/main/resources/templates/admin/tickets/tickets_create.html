@@ -16,48 +16,56 @@
 </head>
 
 <body>
-    <!-- Start: Contact Details -->
-    <section class="py-5 mt-5">
+<!-- Start: Contact Details -->
+<section class="py-5 mt-5">
+    <form  method="post" th:object='${ticket}' th:action="@{/admin/tickets/create}">
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2 class="display-6 fw-bold mb-4">Tiket :&nbsp;<span class="underline" th:text="${event.name}"></span></h2>
+                    <h2 class="display-6 fw-bold mb-4">Tiket :&nbsp;<span class="underline"
+                                                                          th:text="${event.name}"></span></h2>
                     <p class="text-muted">Time left :&nbsp;<span style="font-weight: bold;">08:00</span></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h4 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Order Tiket</span></h4>
+                    <h4 class="fw-bold" style="text-align: left;"><br><span
+                            style="color: rgb(51, 51, 51);">Order Tiket</span></h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="carousel slide" data-bs-ride="false" id="carousel-1">
                         <div class="carousel-inner">
-                            <div class="carousel-item active"><img class="w-100 d-block" th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}" alt="Slide Image"></div>
-                            <div class="carousel-item"><img class="w-100 d-block" th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}" alt="Slide Image"></div>
-                            <div class="carousel-item"><img class="w-100 d-block" th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}" alt="Slide Image"></div>
+                            <div class="carousel-item active"><img class="w-100 d-block"
+                                                                   th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}"
+                                                                   alt="Slide Image"></div>
+                            <div class="carousel-item"><img class="w-100 d-block"
+                                                            th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}"
+                                                            alt="Slide Image"></div>
+                            <div class="carousel-item"><img class="w-100 d-block"
+                                                            th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}"
+                                                            alt="Slide Image"></div>
                         </div>
                         <div>
-                            <!-- Start: Previous --><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><!-- End: Previous -->
-                            <!-- Start: Next --><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a><!-- End: Next -->
+                            <!-- Start: Previous --><a class="carousel-control-prev" href="#carousel-1" role="button"
+                                                       data-bs-slide="prev"><span
+                                class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a>
+                            <!-- End: Previous -->
+                            <!-- Start: Next --><a class="carousel-control-next" href="#carousel-1" role="button"
+                                                   data-bs-slide="next"><span class="carousel-control-next-icon"></span><span
+                                class="visually-hidden">Next</span></a><!-- End: Next -->
                         </div>
-                        <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button></div>
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0"
+                                    class="active"></button>
+                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button>
+                        </div>
                     </div>
                 </div>
                 <div class="col">
-                    <form class="p-3 p-xl-4" method="post" data-bs-theme="light" style="padding-top: 0px;margin-top: -45px;">
-                        <div class="col">
-                            <h6 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Nama Lengkap</span></h6>
-                        </div><!-- Start: Success Example -->
-                        <div class="mb-3"><input class="shadow form-control" type="text" id="name" name="name" placeholder="Full Name"></div><!-- End: Success Example -->
-                        <div class="col">
-                            <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>
-                        </div><input class="form-control shadow" type="number" id="number" min="1" max="5" value="1">
-                        <div class="mb-3"></div>
-                        <h6 class="fw-bold" style="text-align: left;">Bukti Pembayaran</h6><input class="form-control" type="file" style="margin-bottom: 15px;"><a href="#" style="font-weight: bold;color: var(--bs-body-color);text-decoration: underline;">Payment Instruction</a>
-                        <div></div>
-                    </form>
+                    <div th:insert="admin/tickets/tickets_form :: div"></div>
                 </div>
             </div>
             <div class="row">
@@ -104,15 +112,19 @@
             </div>
             <div class="row">
                 <div class="col"></div>
-                <div class="col"><button class="btn btn-primary shadow d-block w-100" type="submit">Send </button></div>
+                <div class="col">
+                    <button class="btn btn-primary shadow d-block w-100" type="submit">Kirim</button>
+                </div>
                 <div class="col"></div>
             </div>
+
         </div>
-    </section><!-- End: Contact Details -->
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/Simple-Slider-swiper-bundle.min.js}"></script>
-    <script th:src="@{/js/Simple-Slider.js}"></script>
-    <script th:src="@{/js/startup-modern.js}"></script>
+    </form>
+</section><!-- End: Contact Details -->
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/Simple-Slider-swiper-bundle.min.js}"></script>
+<script th:src="@{/js/Simple-Slider.js}"></script>
+<script th:src="@{/js/startup-modern.js}"></script>
 </body>
 
 </html>
