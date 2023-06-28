@@ -78,7 +78,7 @@
             </div><!-- End: Simple Slider -->
             <div class="row" style="text-align: left;padding-top: 0px;margin-top: 28px;">
                 <div class="col-xl-12" style="padding-top: 0px;">
-                    <h2 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Webinar Series Statistika 2022 #1 - Model Multivariate Generalized Poisson Regression Modifikasi</span><br><br></h2>
+                    <h2 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);" th:text="${event.name}"></span><br><br></h2>
                 </div>
                 <div class="col">
                     <p class="text-muted">Events Politeknik Statistika (EvStats)</p>
@@ -109,15 +109,14 @@
                 <div class="col-md-6 col-xl-1">
                     <div></div><i class="icon ion-ios-calendar-outline" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i>
                 </div>
-                <div class="col-md-6 col-xl-5">
-                    <div></div>
+                <div style="padding-top: 15px;" class="col-md-6 col-xl-5">
                     <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tanggal</span></h5>
-                    <p class="text-muted">Rabu, 21 Juli 2024</p>
+                    <p class="text-muted" th:text="${event.date}"></p>
                 </div>
                 <div class="col-xl-1"><i class="icon ion-map" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i></div>
-                <div class="col-xl-5">
+                <div style="padding-top: 15px;" class="col-xl-5">
                     <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tempat</span></h5>
-                    <p class="text-muted">Zoom Meeting</p>
+                    <p class="text-muted" th:text="${event.place}"></p>
                 </div>
             </div>
         </div><!-- End: 1 Row 2 Columns -->
@@ -130,10 +129,13 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer placerat dolor ut finibus ullamcorper. Aliquam a diam vitae sapien tempus ornare eu in ante. Sed arcu ligula, tincidunt ac imperdiet eu, ultrices vel nisi. Pellentesque nec tempus nisi. Donec quis consequat felis. Suspendisse potenti. Nullam eget ex ut magna fermentum commodo at eu lacus. Cras luctus dui et lectus convallis tempor. Donec sit amet ultrices ipsum. Sed consectetur est in justo faucibus condimentum. In hac habitasse platea dictumst. Pellentesque eget libero at ex sagittis commodo. Duis eget diam libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec dapibus, turpis nec vehicula pharetra, nisi turpis lacinia sem, eu malesuada nisl augue sed enim.</p>
-                    <p class="text-muted">Vestibulum consequat id ante in rutrum. Pellentesque ornare urna id imperdiet tempor. Donec hendrerit magna in egestas porttitor. Nunc accumsan tempus odio, pulvinar faucibus nulla auctor sed. Vestibulum pretium lacus sit amet arcu dapibus, sed posuere tortor volutpat. Praesent a sem non arcu ultricies imperdiet sed et purus. Ut scelerisque placerat eros. Ut pellentesque nec tellus eget sodales. In eu accumsan massa.</p>
-                    <p class="text-muted">Nullam tincidunt ut quam ut gravida. Mauris varius leo dui, in ultrices libero tempor at. Etiam at lacus at ante pharetra consectetur id sit amet nulla. Cras eu felis id dolor tempor dictum quis id nisi. Quisque vitae metus congue, rutrum risus non, mattis mauris. Donec quis sem malesuada, gravida velit quis, laoreet est. Donec vestibulum elit vel pharetra faucibus. Ut ut ipsum a nunc malesuada convallis. Aliquam finibus turpis ut massa semper, eget faucibus erat vestibulum. Aenean condimentum justo ac purus lobortis, vitae malesuada erat consectetur.</p>
+                    <p class="text-muted" th:text="${event.details}"></p>
+                    <p class="text-muted" th:text="${event.person}"></p>
+                    <p class="text-muted" th:text="${event.additionalDetails}"></p>
                 </div>
+            </div>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <a th:href="@{/events/tickets/{id}(id=${event.id})}" class="btn btn-sm btn-outline-primary">Beli Ticket</a>
             </div>
         </div>
     </section><!-- Start: Footer Multi Column -->
@@ -149,8 +151,8 @@
                 <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Events</h3>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/events/events_list}">Daftar Event</a></li>
-                        <li><a th:href="@{/events/events_favorite}">Favorit</a></li>
+                        <li><a th:href="@{/events/list}">Daftar Event</a></li>
+                        <li><a th:href="@{/events/favorite}">Favorit</a></li>
                     </ul>
                 </div><!-- End: events -->
                 <!-- Start: Komunitas -->

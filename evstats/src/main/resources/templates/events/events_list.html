@@ -86,9 +86,9 @@
                 <div class="col" th:each="event : ${events}">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}">
                         <div class="py-4">
-                            <h4 style="font-weight: bold;" th:text="${event.name}" ></h4>
+                            <h4 style="font-weight: bold;" th:text="${event.name}"></h4>
                             <h4 style="font-size: 16px;font-weight: bold;color: var(--bs-danger-text-emphasis);" th:text="${event.date}"></h4>
-                            <p th:text="${event.details}"></p><a href="#" style="color: var(--bs-body-color);font-weight: bold;">Selengkapnya &gt;&gt;</a>
+                            <p th:text="${event.thumbnail}"></p><a th:href="@{/events/{id}(id=${event.id})}" style="color: var(--bs-body-color);font-weight: bold;">Selengkapnya &gt;&gt;</a>
                         </div>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
                 <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Events</h3>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/events/events_list}">Daftar Event</a></li>
-                        <li><a th:href="@{/events/events_favorite}">Favorit</a></li>
+                        <li><a th:href="@{/events/list}">Daftar Event</a></li>
+                        <li><a th:href="@{/events/favorite}">Favorit</a></li>
                     </ul>
                 </div><!-- End: events -->
                 <!-- Start: Komunitas -->

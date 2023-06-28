@@ -25,8 +25,8 @@ public class EventDto {
     @NotEmpty(message = "Please enter valid event name.")
     private String name;
 
-    @NotEmpty(message = "Please enter valid event thumbnails.")
-    private String thumbnails;
+    @NotEmpty(message = "Please enter valid event thumbnail.")
+    private String thumbnail;
 
     @NotEmpty(message = "Please enter valid event details.")
     private String details;

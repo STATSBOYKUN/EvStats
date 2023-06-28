@@ -32,7 +32,7 @@ public class Event {
     private String name;
 
     @Column(nullable = false)
-    private String thumbnails;
+    private String thumbnail;
 
     @Column(nullable = false)
     private String details;

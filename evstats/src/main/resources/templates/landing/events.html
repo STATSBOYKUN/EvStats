@@ -56,7 +56,7 @@
                 <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                     <div style="max-width: 350px;">
                         <h1 class="display-5 fw-bold mb-4" style="padding-right: 0px;margin-right: -83px;">Tingkatkan diri dengan mengikuti&nbsp;<span class="underline">events</span>.</h1>
-                        <p class="text-muted my-4">Events dihimpun untuk memudahkan seluruh pengguna untuk bertasipisasi dalam events.</p><a class="btn btn-primary btn-lg me-2" role="button" th:href="@{/events/events_list}">Events</a><a class="btn btn-light btn-lg" role="button" th:href="@{/events/events_favorite}">Favorit</a>
+                        <p class="text-muted my-4">Events dihimpun untuk memudahkan seluruh pengguna untuk bertasipisasi dalam events.</p><a class="btn btn-primary btn-lg me-2" role="button" th:href="@{/events/list}">Events</a><a class="btn btn-light btn-lg" role="button" th:href="@{/events/favorite}">Favorit</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -73,7 +73,7 @@
                 <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
                     <div>
                         <h5 class="fs-3 fw-bold mb-4">List Events</h5>
-                        <p class="text-muted mb-4">List Seluruh Events yang diselenggarakan oleh Politeknik Statistika STIS</p><a class="fw-bold mb-3" th:href="@{/events/events_list}">Lihat Daftar Events<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                        <p class="text-muted mb-4">List Seluruh Events yang diselenggarakan oleh Politeknik Statistika STIS</p><a class="fw-bold mb-3" th:href="@{/events/list}">Lihat Daftar Events<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <line x1="15" y1="16" x2="19" y2="12"></line>
@@ -104,7 +104,7 @@
                 <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
                     <div class="ms-md-3">
                         <h5 class="fs-3 fw-bold mb-4">Events Favorit</h5>
-                        <p class="text-muted mb-4">Favoritkan Events yang disukai.</p><a class="fw-bold" th:href="@{/events/events_favorite}">Lihat Favorit<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                        <p class="text-muted mb-4">Favoritkan Events yang disukai.</p><a class="fw-bold" th:href="@{/events/favorite}">Lihat Favorit<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <line x1="15" y1="16" x2="19" y2="12"></line>
@@ -144,8 +144,8 @@
                 <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Events</h3>
                     <ul class="list-unstyled">
-                        <li><a th:href="@{/events/events_list}">Daftar Event</a></li>
-                        <li><a th:href="@{/events/events_favorite}">Favorit</a></li>
+                        <li><a th:href="@{/events/list}">Daftar Event</a></li>
+                        <li><a th:href="@{/events/favorite}">Favorit</a></li>
                     </ul>
                 </div><!-- End: events -->
                 <!-- Start: Komunitas -->

@@ -1,4 +1,4 @@
-package com.umaru.evstats.controller;
+package com.umaru.evstats.controller.User;
 
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.UserService;

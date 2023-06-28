@@ -1,4 +1,4 @@
-package com.umaru.evstats.controller;
+package com.umaru.evstats.controller.User;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
