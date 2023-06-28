@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Tickets - EvStats</title>
+    <title>Events - EvStats</title>
     <link rel="icon" th:href="@{/img/icon/stis.png}">
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrapAdmin.min.css}">
     <link rel="stylesheet" th:href="@{/css/Nunito.css}">
@@ -27,9 +27,9 @@
                         class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/admin/users}"><i class="fas fa-table"></i><span>Users</span></a>
                 </li>
-                <li class="nav-item"><a class="nav-link active" th:href="@{/admin/tickets}"><i
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/tickets}"><i
                         class="fas fa-ticket-alt"></i><span>Tickets</span></a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/admin/events}"><i
+                <li class="nav-item"><a class="nav-link active" th:href="@{/templates/admin/events}"><i
                         class="fas fa-swatchbook"></i><span>Events</span></a></li>
             </ul>
             <div class="text-center d-none d-md-inline">
@@ -113,7 +113,7 @@
                                                                        aria-expanded="false" data-bs-toggle="dropdown"
                                                                        href="#"><span
                                     class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                                    class="border rounded-circle img-profile" th:src="@{img/avatars/avatar3.jpeg}"></a>
+                                    class="border rounded-circle img-profile" src="assets/img/avatars/avatar3.jpeg"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
                                         class="dropdown-item" href="#"><i
                                         class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
@@ -131,96 +131,17 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Tickets</h3>
+                <h3 class="text-dark mb-4">Edit Tickets</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Tickets Info</p>
+                        <p class="text-primary m-0 fw-bold">Tickets Form</p>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 text-nowrap">
-                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label
-                                        class="form-label">Show&nbsp;<select
-                                        class="d-inline-block form-select form-select-sm">
-                                    <option value="10" selected="">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>&nbsp;</label></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
-                                        class="form-label"><input type="search" class="form-control form-control-sm"
-                                                                  aria-controls="dataTable"
-                                                                  placeholder="Search"></label></div>
-                            </div>
+                    <div class="row" style="padding-top: 37px;">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-5">
+                            <div th:insert="admin/tickets/tickets_form :: form"></div>
                         </div>
-                        <div class="table-responsive table mt-2" id="data_Table" role="grid"
-                             aria-describedby="dataTable_info">
-                            <table class="table my-0" id="dataTable">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Jumlah Tiket</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tbody>
-                                <tr th:each="ticket : ${tickets}">
-                                    <td th:text="${ticket.id}"></td>
-                                    <td th:text="${ticket.name}"></td>
-                                    <td th:text="${ticket.tickets}"></td>
-                                    <td th:text="${ticket.date}"></td>
-                                    <td th:text="${ticket.status}"></td>
-                                    <td>
-                                        <a th:href="@{/admin/tickets/{id}/edit(id=${ticket.id})}"><i class="far fa-edit"
-                                                                                                     style="padding: 0px 4px;"></i></a>
-                                        <form style="display:inline" method='post'
-                                              th:action="@{/admin/tickets/{id}/delete(id=${ticket.id})}">
-                                            <button style="border: none; background: none;" type="submit"
-                                                    th:href="@{/admin/tickets/{id}/delete(id=${ticket.id})}"><i
-                                                    class="far fa-trash-alt" style="padding: 0px 4px;"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Jumlah Tiket</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 align-self-center">
-                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing
-                                    1 to 10 of 27</p>
-                            </div>
-                            <div class="col-md-6">
-                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" aria-label="Previous"
-                                                                          href="#"><span aria-hidden="true">«</span></a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
-                                                aria-hidden="true">»</span></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        <div class="col-xl-5"></div>
                     </div>
                 </div>
             </div>

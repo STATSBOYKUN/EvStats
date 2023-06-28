@@ -49,4 +49,6 @@ public class AdminEventsController {
         eventsService.deleteEvent(eventId);
         return new RedirectView("/admin/events");
     }
+
+
 }

@@ -18,7 +18,7 @@
 <body>
 <!-- Start: Contact Details -->
 <section class="py-5 mt-5">
-    <form  method="post" th:object='${ticket}' th:action="@{/admin/tickets/create}">
+    <form method="post" th:object='${ticket}' th:action="@{/admin/tickets/create}">
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -65,7 +65,30 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div th:insert="admin/tickets/tickets_form :: div"></div>
+                    <div class="p-3 p-xl-4" data-bs-theme="light" style="padding-top: 0px;margin-top: -45px;">
+                        <div class="col">
+                            <h6 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Nama Lengkap</span>
+                            </h6>
+                        </div><!-- Start: Success Example -->
+                        <div class="mb-3">
+                            <input th:field='${ticket.name}' class="shadow form-control" type="text" name="name"
+                                   placeholder="Full Name">
+                            <input th:field='${ticket.id}' type="hidden" name="id">
+                            <input th:field='${ticket.email}' type="hidden" name="email">
+                            <input th:field='${ticket.status}' type="hidden" name="status">
+                        </div><!-- End: Success Example -->
+                        <div class="col">
+                            <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>
+                        </div>
+                        <input th:field='${ticket.tickets}' class="form-control shadow" type="number" name="tickets"
+                               min="1" max="5" value="1">
+                        <div class="mb-3"></div>
+                        <h6 class="fw-bold" style="text-align: left;">Bukti Pembayaran</h6><input
+                            th:field='${ticket.invoices}' class="form-control" type="file" style="margin-bottom: 15px;"><a
+                            href="#" style="font-weight: bold;color: var(--bs-body-color);text-decoration: underline;">Tutorial
+                        Pembayaran</a>
+                        <div></div>
+                    </div>
                 </div>
             </div>
             <div class="row">

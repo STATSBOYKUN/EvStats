@@ -10,4 +10,6 @@ public interface TicketService {
     public TicketDto getTicket(Long ticketId);
     public void deleteTicket(Long ticketId);
     public void saveTickets(TicketDto ticketDto);
+
+    public byte[] getInvoice(Long ticketId);
 }

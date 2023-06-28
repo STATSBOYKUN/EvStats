@@ -46,4 +46,15 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = TicketMapper.mapToTicket(ticketDto);
         ticketsRepository.save(ticket);
     }
+
+    @Override
+    public byte[] getInvoice(Long ticketId) {
+        Optional<Ticket> tickets = ticketsRepository.findById(ticketId);
+        byte[] image = tickets.get().getInvoices();
+        if (tickets.isPresent()){
+            return image;
+        } else {
+            return null;
+        }
+    }
 }

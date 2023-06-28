@@ -1,17 +1,34 @@
-<div class="p-3 p-xl-4" data-bs-theme="light" style="padding-top: 0px;margin-top: -45px;">
-    <div class="col">
-        <h6 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Nama Lengkap</span></h6>
-    </div><!-- Start: Success Example -->
+
+<form method="post" th:object='${ticket}' th:action="@{/admin/tickets/edit}">
     <div class="mb-3">
-        <input th:field='${ticket.name}' class="shadow form-control" type="text" name="name" placeholder="Full Name">
-        <input th:field='${ticket.id}' type="hidden" name="id">
-        <input th:field='${ticket.email}' value="a@mail.com" type="hidden" name="email">
-        <input th:field='${ticket.status}' value="Pending" type="hidden" name="status">
-    </div><!-- End: Success Example -->
-    <div class="col">
-        <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>
-    </div><input th:field='${ticket.tickets}' class="form-control shadow" type="number" id="number" min="1" max="5" value="1">
-    <div class="mb-3"></div>
-    <h6 class="fw-bold" style="text-align: left;">Bukti Pembayaran</h6><input th:field='${ticket.invoices}' class="form-control" type="file" style="margin-bottom: 15px;"><a href="#" style="font-weight: bold;color: var(--bs-body-color);text-decoration: underline;">Tutorial Pembayaran</a>
-    <div></div>
-</div>
+        <h6 style="font-weight: bold;">Nama Lengkap</h6>
+        <input th:field='${ticket.name}' class="form-control" type="text" name="name" readonly>
+        <input th:field='${ticket.id}' type="hidden" id="id" name="id">
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Email</h6>
+        <input th:field='${ticket.email}' type="email"  class="form-control" name="email" readonly>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Jumlah Tiket</h6>
+        <input th:field='${ticket.tickets}' type="number"  class="form-control" name="tickets" readonly>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Tanggal</h6>
+        <input th:field='${ticket.date}' class="form-control" type="date" name="date" readonly>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Status</h6>
+        <select type="text" th:value="${ticket.status}" class="form-control" name="status" required>
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Invoices</h6>
+        <input th:field='${ticket.invoices}' th:value="${ticket.invoices}" type="hidden" name="invoices">
+        <a class="form-control" style="color: var(--bs-body-color);font-weight: bold;" th:href="@{/invoices/{ticketId}(ticketId=${ticket.id})}" >Lihat</a>
+    </div>
+    <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Kirim</button></div>
+</form>

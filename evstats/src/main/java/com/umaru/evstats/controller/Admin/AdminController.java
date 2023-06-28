@@ -1,7 +1,9 @@
 package com.umaru.evstats.controller.Admin;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.service.EventService;
+import com.umaru.evstats.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,18 @@ public class AdminController {
     @Autowired
     private EventService eventsService;
 
+    @Autowired
+    private TicketService ticketsService;
+
     @GetMapping("/admin/dashboard")
     public String dashboard(){
         return "/admin/admin_dashboard";
     }
 
     @GetMapping("/admin/tickets")
-    public String tickets(){
+    public String tickets(Model model){
+        List<TicketDto> tickets = ticketsService.getTickets();
+        model.addAttribute("tickets", tickets);
         return "/admin/admin_tickets";
     }
 
