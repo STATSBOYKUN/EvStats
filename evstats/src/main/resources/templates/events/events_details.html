@@ -62,18 +62,12 @@
                     <!-- Start: Slide Wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Start: Slide -->
-                        <div class="swiper-slide"></div><!-- End: Slide -->
-                        <!-- Start: Slide -->
-                        <div class="swiper-slide"></div><!-- End: Slide -->
-                        <!-- Start: Slide -->
-                        <div class="swiper-slide"></div><!-- End: Slide -->
+                        <div class="swiper-slide">
+                            <img th:src="@{/poster/{posterName}(posterName=${event.poster})}" alt="">
+                        </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
                     <!-- Start: Pagination -->
                     <div class="swiper-pagination"></div><!-- End: Pagination -->
-                    <!-- Start: Previous -->
-                    <div class="swiper-button-prev"></div><!-- End: Previous -->
-                    <!-- Start: Next -->
-                    <div class="swiper-button-next"></div><!-- End: Next -->
                 </div><!-- End: Slideshow -->
             </div><!-- End: Simple Slider -->
             <div class="row" style="text-align: left;padding-top: 0px;margin-top: 28px;">
@@ -111,7 +105,7 @@
                 </div>
                 <div class="col-md-6 col-xl-5">
                     <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tanggal</span></h5>
-                    <p class="text-muted" th:text="${event.date}"></p>
+                    <p class="text-muted" th:text="${#temporals.format(event.date, 'EEEE, d MMMM yyyy')} + ' ' + ${event.time} + ' WIB'"></p>
                 </div>
                 <div style="padding-top: 15px;" class="col-xl-1"><i class="icon ion-map" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i></div>
                 <div class="col-xl-5">
@@ -129,9 +123,9 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p class="text-muted" th:text="${event.details}"></p>
-                    <p class="text-muted" th:text="${event.person}"></p>
-                    <p class="text-muted" th:text="${event.additionalDetails}"></p>
+                    <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.details}"></p>
+                    <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.person}"></p>
+                    <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.additionalDetails}"></p>
                 </div>
             </div>
             <div class="btn-toolbar mb-2 mb-md-0">

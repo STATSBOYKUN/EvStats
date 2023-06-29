@@ -48,4 +48,7 @@ public class EventDto {
 
     @NotEmpty(message = "Please enter valid event ticket price.")
     private Integer price;
+
+    @NotEmpty(message = "Please enter valid event poster.")
+    private String poster;
 }

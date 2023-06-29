@@ -16,6 +16,7 @@ public class EventMapper {
                 .time(event.getTime())
                 .place(event.getPlace())
                 .price(event.getPrice())
+                .poster(event.getPoster())
                 .build();
         return eventDto;
     }
@@ -31,6 +32,7 @@ public class EventMapper {
                 .time(eventDto.getTime())
                 .place(eventDto.getPlace())
                 .price(eventDto.getPrice())
+                .poster(eventDto.getPoster())
                 .build();
         return event;
     }

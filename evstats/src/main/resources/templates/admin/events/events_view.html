@@ -10,6 +10,9 @@
     <link rel="stylesheet" th:href="@{/css/Nunito.css}">
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/css/untitled.css}">
+    <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 
 <body id="page-top">
@@ -158,6 +161,19 @@
                                 <dd class="col-sm-7" th:text="${event.price}"></dd>
                                 <dt class="col-sm-5">Informasi Tambahan</dt>
                                 <dd class="col-sm-7" th:text="${event.additionalDetails}"></dd>
+                                <dt class="col-sm-5">Informasi Tambahan</dt>
+                                <dd class="col-sm-7" th:text="${event.additionalDetails}"></dd>
+                                <dt class="col-sm-5">Poster</dt>
+                                <dd class="col-sm-7"><a href="#" style="color: var(--bs-body-color);font-weight: bold;" data-toggle="modal" data-target="#imageModal" >Lihat Poster</a></dd>
+                                <div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img th:src="@{/poster/{posterName}(posterName=${event.poster})}" class="img-fluid" alt="Image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </dl>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 
-<form method="post" data-bs-theme="light" th:object='${event}' th:action="@{/admin/events/create}">
+<form method="post" data-bs-theme="light" enctype="multipart/form-data" th:object='${event}' th:action="@{/admin/events/create}">
     <div class="mb-3">
         <h6 style="font-weight: bold;">Nama Events</h6>
         <input th:field='${event.name}' class="form-control" type="text" name="name">
@@ -35,7 +35,11 @@
     </div>
     <div class="mb-3">
         <h6 style="font-weight: bold;">Informasi Tambahan</h6>
-        <textarea th:field='${event.additionalDetails}' class="form-control" maxlength="500" name="additionalDetails"></textarea>
+        <textarea th:field='${event.additionalDetails}' style="white-space: pre-wrap;" class="form-control" maxlength="500" name="additionalDetails"></textarea>
+    </div>
+    <div class="mb-3">
+        <h6 style="font-weight: bold;">Poster</h6>
+        <input class="form-control" type="file" name="imageFile" style="margin-bottom: 15px;">
     </div>
     <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Kirim</button></div>
 </form>

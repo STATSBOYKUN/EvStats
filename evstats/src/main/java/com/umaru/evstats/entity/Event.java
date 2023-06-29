@@ -34,13 +34,15 @@ public class Event {
     @Column(nullable = false)
     private String thumbnail;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, length = 5000)
     private String details;
 
     @Column(nullable = false)
     private String person;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, length = 2000)
     private String additionalDetails;
 
     @Column(nullable = false)
@@ -56,4 +58,7 @@ public class Event {
 
     @Column(nullable = false)
     private Integer price;
+
+    @Column(nullable = false)
+    private String poster;
 }

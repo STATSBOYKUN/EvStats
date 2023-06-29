@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @Controller
 public class AdminEventsController {
@@ -38,9 +41,13 @@ public class AdminEventsController {
     }
 
     @RequestMapping(value = "/admin/events/create", method = RequestMethod.POST)
-    public RedirectView storeEvent(Model model, @ModelAttribute("event") EventDto eventDto){
+    public RedirectView storeEvent(Model model, @ModelAttribute("event") EventDto eventDto, @RequestParam("imageFile") MultipartFile imageFile){
         model.addAttribute("event", eventDto);
-        eventsService.saveEvents(eventDto);
+        try {
+            eventsService.saveEvents(eventDto, imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return new RedirectView("/admin/events");
     }
 
