@@ -21,7 +21,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String loginForm(ModelMap model) {
-        return "loginUser";
+        return "/other/user_login";
     }
 
     @GetMapping("/registration")

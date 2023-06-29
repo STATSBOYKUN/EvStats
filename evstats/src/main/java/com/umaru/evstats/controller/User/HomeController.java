@@ -18,6 +18,7 @@ public class HomeController {
 
     @GetMapping("/signup")
     public String signup(){
+
         return "/other/signup";
     }
 
