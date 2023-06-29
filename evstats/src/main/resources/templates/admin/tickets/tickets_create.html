@@ -74,7 +74,7 @@
                         <div class="col">
                             <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>
                         </div>
-                        <input th:field='${ticket.tickets}' class="form-control shadow" type="number" name="tickets"
+                        <input th:field='${ticket.tickets}' class="form-control shadow" type="number" id="tickets" name="tickets"
                                min="1" max="5" value="1">
                         <div class="mb-3"></div>
                         <h6 class="fw-bold" style="text-align: left;">Bukti Pembayaran</h6><input
@@ -100,7 +100,7 @@
                     <p class="text-muted">Tiket</p>
                 </div>
                 <div class="col">
-                    <p class="text-muted" style="text-align: right;">Rp 30.000,00</p>
+                    <p class="text-muted" id="ticket-price" th:text="${event.price}" style="text-align: right;"></p>
                 </div>
             </div>
             <div class="row">
@@ -124,7 +124,7 @@
                     <h6 class="fw-bold" style="text-align: left;">Total</h6>
                 </div>
                 <div class="col">
-                    <h6 class="fw-bold" style="text-align: right;">Rp 30.011,00</h6>
+                    <h6 class="fw-bold" id="total" style="text-align: right;">Rp 0.011,00</h6>
                 </div>
             </div>
             <div class="row">
@@ -142,6 +142,7 @@
 <script th:src="@{/js/Simple-Slider-swiper-bundle.min.js}"></script>
 <script th:src="@{/js/Simple-Slider.js}"></script>
 <script th:src="@{/js/startup-modern.js}"></script>
+<script th:src="@{/js/payment-info.js}"></script>
 </body>
 
 </html>

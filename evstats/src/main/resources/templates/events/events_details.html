@@ -104,12 +104,12 @@
                     <div></div><i class="icon ion-ios-calendar-outline" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i>
                 </div>
                 <div class="col-md-6 col-xl-5">
-                    <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tanggal</span></h5>
+                    <h5 class="fw-bold" style="text-align: left;"><br><span class="underline pb-0"  style="color: rgb(51, 51, 51);">Tanggal</span></h5>
                     <p class="text-muted" th:text="${#temporals.format(event.date, 'EEEE, d MMMM yyyy')} + ' ' + ${event.time} + ' WIB'"></p>
                 </div>
                 <div style="padding-top: 15px;" class="col-xl-1"><i class="icon ion-map" style="font-size: 40px;text-align: center;color: var(--bs-body-color);border-color: var(--bs-body-color);"></i></div>
                 <div class="col-xl-5">
-                    <h5 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Tempat</span></h5>
+                    <h5 class="fw-bold" style="text-align: left;"><br><span class="underline pb-0" style="color: rgb(51, 51, 51);">Tempat</span></h5>
                     <p class="text-muted" th:text="${event.place}"></p>
                 </div>
             </div>
@@ -124,12 +124,18 @@
             <div class="row">
                 <div class="col">
                     <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.details}"></p>
+                    <p class="text-muted" style="font-weight: bold;">Pembicara : </p>
                     <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.person}"></p>
+                    <p class="text-muted" style="font-weight: bold;">Informasi Tambahan : </p>
                     <p class="text-muted" style="white-space: pre-wrap;" th:text="${event.additionalDetails}"></p>
                 </div>
             </div>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <a th:href="@{/events/tickets/{id}(id=${event.id})}" class="btn btn-sm btn-outline-primary">Beli Ticket</a>
+            <div class="row">
+                <div class="col">
+                    <div class="btn-toolbar mb-2 mb-md-0"  style="justify-content: center; align-items: center;">
+                        <a th:href="@{/events/tickets/{id}(id=${event.id})}" class="btn btn-primary shadow-lg">Ikuti Event</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section><!-- Start: Footer Multi Column -->
