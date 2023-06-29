@@ -63,7 +63,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void editTicket(TicketDto ticketDto) {
+    public void saveTicket(TicketDto ticketDto) {
         Ticket ticket = TicketMapper.mapToTicket(ticketDto);
         ticketsRepository.save(ticket);
     }

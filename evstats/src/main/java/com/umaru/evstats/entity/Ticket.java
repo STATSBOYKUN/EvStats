@@ -24,6 +24,9 @@ public class Ticket {
     private String name;
 
     @Column(nullable = false)
+    private String event;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)

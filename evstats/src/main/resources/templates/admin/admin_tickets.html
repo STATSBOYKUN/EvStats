@@ -162,7 +162,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Lengkap</th>
-                                    <th>Jumlah Tiket</th>
+                                    <th>Event</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -173,7 +173,7 @@
                                 <tr th:each="ticket : ${tickets}">
                                     <td th:text="${ticket.id}"></td>
                                     <td th:text="${ticket.name}"></td>
-                                    <td th:text="${ticket.tickets}"></td>
+                                    <td th:text="${ticket.event}"></td>
                                     <td th:text="${ticket.date}"></td>
                                     <td th:text="${ticket.status}"></td>
                                     <td>

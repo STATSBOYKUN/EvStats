@@ -19,6 +19,9 @@ public class TicketDto {
     @NotEmpty(message = "Please enter valid name.")
     private String name;
 
+    @NotEmpty(message = "Please enter valid event.")
+    private String event;
+
     @NotEmpty(message = "Please enter valid email.")
     @Email
     private String email;

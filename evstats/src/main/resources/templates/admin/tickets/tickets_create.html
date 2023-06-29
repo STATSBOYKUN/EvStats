@@ -18,7 +18,7 @@
 <body>
 <!-- Start: Contact Details -->
 <section class="py-5 mt-5">
-    <form method="post" enctype="multipart/form-data" th:object='${ticket}' th:action="@{/admin/tickets/create}">
+    <form method="post" enctype="multipart/form-data" th:object='${ticket}' th:action="@{/admin/tickets/create/{eventId}(eventId=${event.id})}">
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -70,6 +70,7 @@
                             <input th:field='${ticket.name}' class="shadow form-control" type="text" name="name"
                                    placeholder="Full Name">
                             <input th:field='${ticket.id}' type="hidden" name="id">
+                            <input th:field='${ticket.event}' type="hidden" th:attr="value = ${event.name}" name="eventName">
                         </div><!-- End: Success Example -->
                         <div class="col">
                             <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>

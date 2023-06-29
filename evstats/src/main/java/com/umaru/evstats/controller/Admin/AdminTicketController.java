@@ -1,11 +1,10 @@
 package com.umaru.evstats.controller.Admin;
 
+import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.TicketDto;
+import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,9 @@ import java.io.IOException;
 public class AdminTicketController {
     @Autowired
     private TicketService ticketsService;
+
+    @Autowired
+    private EventService eventsService;
 
     @GetMapping("/admin/tickets/{ticketId}")
     public String viewTicket(Model model, @PathVariable Long ticketId) {
@@ -37,9 +39,11 @@ public class AdminTicketController {
         return "/admin/tickets/tickets_edit";
     }
 
-    @RequestMapping(value = "/admin/tickets/create", method = RequestMethod.POST)
-    public RedirectView storeTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile){
+    @RequestMapping(value = "/admin/tickets/create/{eventId}", method = RequestMethod.POST)
+    public RedirectView storeTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId){
         try {
+            EventDto event = eventsService.getEvent(eventId);
+            ticketDto.setEvent(event.getName());
             ticketsService.saveTickets(ticketDto, imageFile);
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,7 +54,7 @@ public class AdminTicketController {
 
     @RequestMapping(value = "/admin/tickets/edit", method = RequestMethod.POST)
     public RedirectView editTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto){
-        ticketsService.editTicket(ticketDto);
+        ticketsService.saveTicket(ticketDto);
         model.addAttribute("ticket", ticketDto);
 
         return new RedirectView("/admin/tickets");
@@ -61,6 +65,4 @@ public class AdminTicketController {
         ticketsService.deleteTicket(ticketId);
         return new RedirectView("/admin/tickets");
     }
-
-
 }

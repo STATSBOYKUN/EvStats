@@ -12,5 +12,5 @@ public interface TicketService {
     public TicketDto getTicket(Long ticketId);
     public void deleteTicket(Long ticketId);
     public void saveTickets(TicketDto ticketDto, MultipartFile imageFile) throws IOException;
-    public void editTicket(TicketDto ticketDto);
+    public void saveTicket(TicketDto ticketDto);
 }

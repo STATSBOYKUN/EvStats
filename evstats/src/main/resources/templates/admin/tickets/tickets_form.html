@@ -10,6 +10,10 @@
         <input th:field='${ticket.email}' type="email"  class="form-control" name="email" readonly>
     </div>
     <div class="mb-3">
+        <h6 style="font-weight: bold;">Event</h6>
+        <input th:field='${ticket.event}' type="text"  class="form-control" name="event" readonly>
+    </div>
+    <div class="mb-3">
         <h6 style="font-weight: bold;">Jumlah Tiket</h6>
         <input th:field='${ticket.tickets}' type="number"  class="form-control" name="tickets" readonly>
     </div>
