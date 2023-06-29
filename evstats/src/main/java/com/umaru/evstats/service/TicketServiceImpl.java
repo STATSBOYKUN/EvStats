@@ -6,7 +6,12 @@ import com.umaru.evstats.mapper.TicketMapper;
 import com.umaru.evstats.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,19 +47,24 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void saveTickets(TicketDto ticketDto) {
+    public void saveTickets(TicketDto ticketDto, MultipartFile imageFile) throws IOException {
+        String folder = "src/main/resources/static/invoices/";
+        byte[] bytes = imageFile.getBytes();
+        Path path = Paths.get(folder + imageFile.getOriginalFilename()).toAbsolutePath();
+        Files.write(path, bytes);
+
+        String invoices = imageFile.getOriginalFilename();
+        ticketDto.setInvoices(invoices);
+        ticketDto.setStatus("Pending");
+        ticketDto.setEmail("a");
         Ticket ticket = TicketMapper.mapToTicket(ticketDto);
+
         ticketsRepository.save(ticket);
     }
 
     @Override
-    public byte[] getInvoice(Long ticketId) {
-        Optional<Ticket> tickets = ticketsRepository.findById(ticketId);
-        byte[] image = tickets.get().getInvoices();
-        if (tickets.isPresent()){
-            return image;
-        } else {
-            return null;
-        }
+    public void editTicket(TicketDto ticketDto) {
+        Ticket ticket = TicketMapper.mapToTicket(ticketDto);
+        ticketsRepository.save(ticket);
     }
 }

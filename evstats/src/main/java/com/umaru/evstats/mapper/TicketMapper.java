@@ -16,6 +16,7 @@ public class TicketMapper {
                 .build();
         return ticketDto;
     }
+
     public static Ticket mapToTicket(TicketDto ticketDto) {
         Ticket ticket = Ticket.builder()
                 .id(ticketDto.getId())

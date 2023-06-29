@@ -23,8 +23,7 @@ public class TicketDto {
     @Email
     private String email;
 
-    @NotEmpty(message = "Please enter valid invoices.")
-    private byte[] invoices;
+    private String invoices;
 
     @NotEmpty(message = "Please enter valid number of tickets.")
     private Integer tickets;

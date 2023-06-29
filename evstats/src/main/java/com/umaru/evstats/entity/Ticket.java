@@ -1,7 +1,5 @@
 package com.umaru.evstats.entity;
 
-
-import com.umaru.evstats.controller.Admin.AdminController;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,11 +23,11 @@ public class Ticket {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column()
     private String email;
 
     @Column(nullable = false)
-    private byte[] invoices;
+    private String invoices;
 
     @Column(nullable = false)
     private Integer tickets;

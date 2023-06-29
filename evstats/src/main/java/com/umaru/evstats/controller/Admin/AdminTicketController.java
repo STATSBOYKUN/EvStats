@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @Controller
 public class AdminTicketController {
@@ -34,26 +37,22 @@ public class AdminTicketController {
         return "/admin/tickets/tickets_edit";
     }
 
-    @GetMapping("/invoices/{ticketId}")
-    public ResponseEntity<byte[]> viewInvoice(Model model, @PathVariable Long ticketId) {
-        byte[] image = ticketsService.getInvoice(ticketId);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("image/png"))
-                .body(image);
-    }
-
     @RequestMapping(value = "/admin/tickets/create", method = RequestMethod.POST)
-    public RedirectView storeTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto){
+    public RedirectView storeTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile){
+        try {
+            ticketsService.saveTickets(ticketDto, imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("ticket", ticketDto);
-        ticketsService.saveTickets(ticketDto);
-        return new RedirectView("/events/events_list");
+        return new RedirectView("/events/list");
     }
 
     @RequestMapping(value = "/admin/tickets/edit", method = RequestMethod.POST)
     public RedirectView editTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto){
+        ticketsService.editTicket(ticketDto);
         model.addAttribute("ticket", ticketDto);
-        ticketsService.saveTickets(ticketDto);
+
         return new RedirectView("/admin/tickets");
     }
 

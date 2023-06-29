@@ -27,8 +27,17 @@
     </div>
     <div class="mb-3">
         <h6 style="font-weight: bold;">Invoices</h6>
-        <input th:field='${ticket.invoices}' th:value="${ticket.invoices}" type="hidden" name="invoices">
-        <a class="form-control" style="color: var(--bs-body-color);font-weight: bold;" th:href="@{/invoices/{ticketId}(ticketId=${ticket.id})}" >Lihat</a>
+        <input th:field='${ticket.invoices}' type="hidden" name="invoices">
+        <a href="#" class="form-control" style="color: var(--bs-body-color);font-weight: bold;" data-toggle="modal" data-target="#imageModal" >Lihat</a>
+        <div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img th:src="@{/invoices/{invoiceName}(invoiceName=${ticket.invoices})}" class="img-fluid" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Kirim</button></div>
 </form>
