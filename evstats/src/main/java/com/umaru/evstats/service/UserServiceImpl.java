@@ -1,6 +1,9 @@
 package com.umaru.evstats.service;
 
+import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.dto.UserDto;
+import com.umaru.evstats.entity.Ticket;
+import com.umaru.evstats.mapper.TicketMapper;
 import com.umaru.evstats.mapper.UserMapper;
 import com.umaru.evstats.entity.Role;
 import com.umaru.evstats.entity.User;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.umaru.evstats.mapper.UserMapper.mapToUserDto;
@@ -39,8 +43,10 @@ public class UserServiceImpl implements UserService {
                 userDto.getPassword(),
                 Arrays.asList(role)
         );
-        userRepository.save(user);
 
+        User userFull = UserMapper.mapToUser(userDto);
+
+        userRepository.save(userFull);
     }
 
     @Override
@@ -63,6 +69,21 @@ public class UserServiceImpl implements UserService {
                 .map((user) -> (UserMapper.mapToUserDto(user)))
                 .collect(Collectors.toList());
         return userDtos;
+    }
+
+    @Override
+    public UserDto getUser(Long userId) {
+        Optional<User> users = userRepository.findById(userId);
+        if (users.isPresent()){
+            return UserMapper.mapToUserDto(users.get());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 
     @Override

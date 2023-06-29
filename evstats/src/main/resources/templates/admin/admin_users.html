@@ -112,24 +112,26 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>#</th>
+                                            <th>Username</th>
                                             <th>Email</th>
-                                            <th>Country</th>
-                                            <th>Age</th>
                                             <th>Join Date</th>
-                                            <th>Position</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" th:src="@{/img/avatars/avatar1.jpeg}">Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                            <td><i class="far fa-edit" style="padding: 0px 4px;"></i><i class="far fa-trash-alt" style="padding: 0px 4px;"></i></td>
+                                        <tr th:each="user : ${users}">
+                                            <td th:text="${user.id}"></td>
+                                            <td th:text="${user.username}"></td>
+                                            <td th:text="${user.email}"></td>
+                                            <td th:text="${user.createdAt}"></td>
+                                            <td>
+                                                <a th:href="@{/admin/users/{id}(id=${user.id})}"><i class="far fa-eye" style="padding: 0px 4px;"></i></a>
+                                                <a th:href="@{/admin/users/{id}/edit(id=${user.id})}"><i class="far fa-edit" style="padding: 0px 4px;"></i></a>
+                                                <form style="display:inline" method='post' th:action="@{/admin/users/{id}/delete(id=${user.id})}">
+                                                    <button style="border: none; background: none;" type="submit" th:href="@{/admin/users/{id}/delete(id=${user.id})}"><i class="far fa-trash-alt" style="padding: 0px 4px;"></i></button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

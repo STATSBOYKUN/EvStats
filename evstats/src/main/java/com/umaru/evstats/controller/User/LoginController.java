@@ -9,34 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
     @Autowired
-    private UserService userService;
+    private UserService usersService;
 
-    @RequestMapping("/login")
-    public String loginForm(ModelMap model) {
-        return "/other/user_login";
-    }
-
-    @GetMapping("/registration")
-    public String registrationForm(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String registration(
+    @PostMapping("/signup")
+    public String registration(Model model,
             @Valid @ModelAttribute("user") UserDto userDto,
-            BindingResult result,
-            Model model) {
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
+            BindingResult result
+            ) {
+        User existingUser = usersService.findUserByEmail(userDto.getEmail());
 
         if (existingUser != null)
             result.rejectValue("email", null,
@@ -44,11 +29,11 @@ public class LoginController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", userDto);
-            return "/registration";
+            return "other/user_signup";
         }
 
-        userService.saveUser(userDto);
-        return "redirect:/registration?success";
+        usersService.saveUser(userDto);
+        return "redirect:/signup?success";
     }
 
 }

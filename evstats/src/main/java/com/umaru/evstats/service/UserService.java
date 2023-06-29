@@ -15,5 +15,7 @@ public interface UserService {
     public List<UserDto> getUsers();
     public List<UserDto> getUsersUser();
 
+    public UserDto getUser(Long userId);
+    public void deleteUser(Long userId);
     int getJmlUser();
 }

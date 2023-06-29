@@ -2,6 +2,7 @@ package com.umaru.evstats.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,7 +32,7 @@ public class UserDto {
     @NotEmpty(message = "Please enter valid pekerjaan.")
     private String pekerjaan;
 
-    @NotEmpty(message = "Please enter valid umur.")
+    @NotNull(message = "Please enter valid umur.")
     private Integer umur;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

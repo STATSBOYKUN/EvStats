@@ -2,8 +2,10 @@ package com.umaru.evstats.controller.Admin;
 
 import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.TicketDto;
+import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
+import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class AdminController {
     @Autowired
     private TicketService ticketsService;
 
+    @Autowired
+    private UserService usersService;
+
     @GetMapping("/admin/dashboard")
     public String dashboard(){
         return "/admin/admin_dashboard";
@@ -33,7 +38,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/users")
-    public String users(){
+    public String users(Model model){
+        List<UserDto> users = usersService.getUsers();
+        model.addAttribute("users", users);
         return "/admin/admin_users";
     }
 

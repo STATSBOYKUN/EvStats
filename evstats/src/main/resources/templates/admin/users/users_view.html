@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Events - EvStats</title>
+    <title>Admin - EvStats</title>
     <link rel="icon" th:href="@{/img/icon/stis.png}">
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrapAdmin.min.css}">
     <link rel="stylesheet" th:href="@{/css/Nunito.css}">
@@ -134,44 +134,29 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">View Events</h3>
+                <h3 class="text-dark mb-4">View Users</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Events #<span th:text="${event.id}"></span></p>
+                        <p class="text-primary m-0 fw-bold">User #<span th:text="${user.id}"></span></p>
                     </div>
                     <div class="row" style="padding-top: 37px;">
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
                             <dl class="row">
-                                <dt class="col-sm-5">Event Name</dt>
-                                <dd class="col-sm-7" th:text="${event.name}"></dd>
-                                <dt class="col-sm-5">Thumbnails</dt>
-                                <dd class="col-sm-7" th:text="${event.thumbnail}"></dd>
-                                <dt class="col-sm-5">Details</dt>
-                                <dd class="col-sm-7" th:text="${event.details}"></dd>
-                                <dt class="col-sm-5">Pembicara</dt>
-                                <dd class="col-sm-7" th:text="${event.person}"></dd>
-                                <dt class="col-sm-5">Tanggal</dt>
-                                <dd class="col-sm-7" th:text="${event.date}"></dd>
-                                <dt class="col-sm-5">Waktu</dt>
-                                <dd class="col-sm-7" th:text="${event.time}"></dd>
-                                <dt class="col-sm-5">Tempat</dt>
-                                <dd class="col-sm-7" th:text="${event.place}"></dd>
-                                <dt class="col-sm-5">Harga Tiket (Rupiah) </dt>
-                                <dd class="col-sm-7" th:text="${event.price}"></dd>
-                                <dt class="col-sm-5">Informasi Tambahan</dt>
-                                <dd class="col-sm-7" th:text="${event.additionalDetails}"></dd>
-                                <dt class="col-sm-5">Poster</dt>
-                                <dd class="col-sm-7"><a href="#" style="color: var(--bs-body-color);font-weight: bold;" data-toggle="modal" data-target="#imageModal" >Lihat Poster</a></dd>
-                                <div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <img th:src="@{/poster/{posterName}(posterName=${event.poster})}" class="img-fluid" alt="Image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <dt class="col-sm-5">Username</dt>
+                                <dd class="col-sm-7" th:text="${user.username}"></dd>
+                                <dt class="col-sm-5">Email</dt>
+                                <dd class="col-sm-7" th:text="${user.email}"></dd>
+                                <dt class="col-sm-5">Provinsi</dt>
+                                <dd class="col-sm-7" th:text="${user.provinsi}"></dd>
+                                <dt class="col-sm-5">Pekerjaan</dt>
+                                <dd class="col-sm-7" th:text="${user.pekerjaan}"></dd>
+                                <dt class="col-sm-5">Umur</dt>
+                                <dd class="col-sm-7" th:text="${user.umur}"></dd>
+                                <dt class="col-sm-5">Akun Dibuat</dt>
+                                <dd class="col-sm-7" th:text="${user.createdAt}"></dd>
+                                <dt class="col-sm-5">Akun Diubah</dt>
+                                <dd class="col-sm-7" th:text="${user.updatedAt}"></dd>
                             </dl>
                         </div>
                     </div>
