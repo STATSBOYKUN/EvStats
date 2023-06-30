@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -25,7 +25,7 @@ public class UserController {
 
     @GetMapping("/")
     public String registrationForm(ModelMap model) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/index";
     }

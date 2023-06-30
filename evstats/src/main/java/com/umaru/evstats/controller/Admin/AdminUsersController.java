@@ -25,7 +25,7 @@ public class AdminUsersController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -33,7 +33,7 @@ public class AdminUsersController {
 
     @GetMapping("/admin/users/{userId}")
     public String viewUser(ModelMap model, @PathVariable Long userId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         UserDto userDto = usersService.getUser(userId);
         model.addAttribute("user", user);
@@ -42,7 +42,7 @@ public class AdminUsersController {
 
     @GetMapping("/admin/users/{userId}/edit")
     public String editUser(ModelMap model, @PathVariable Long userId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         UserDto userDto = usersService.getUser(userId);
         if (user == null) {

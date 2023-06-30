@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -31,7 +31,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String index(ModelMap model){
-        String username = getLogedInUsername();
+        String username = getUserLogin();
 
         model.put("name", username);
         return "/other/user_login";

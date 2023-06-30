@@ -1,43 +1,118 @@
-<form method="post" data-bs-theme="light" role="form" th:action="@{/signup}" th:object="${user}">
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Email</h6>
-        <input th:field='${user.email}' class="shadow-sm form-control" type="email" name="email" placeholder="Email">
-        <input th:field='${user.id}' type="hidden" name="id">
-    </div>
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Username</h6><input th:field='${user.username}' class="form-control" type="text"
-                                                           name="username" placeholder="Username">
-    </div>
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Provinsi</h6>
-        <select type="text" th:value="${user.provinsi}" name="provinsi" class="form-select">
-            <option th:each="provinsi : ${provinsi}" th:value="${provinsi}" th:text="${provinsi}"></option>
-        </select>
-    </div>
+<form
+  method="post"
+  data-bs-theme="light"
+  role="form"
+  th:action="@{/signup}"
+  th:object="${user}"
+>
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Email</h6>
+    <input
+      th:field="${user.email}"
+      class="shadow-sm form-control"
+      type="email"
+      name="email"
+      placeholder="Email"
+    />
+    <input th:field="${user.id}" type="hidden" name="id" />
+  </div>
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Username</h6>
+    <input
+      th:field="${user.username}"
+      class="form-control"
+      type="text"
+      name="username"
+      placeholder="Username"
+    />
+  </div>
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Provinsi</h6>
+    <select
+      type="text"
+      th:value="${user.provinsi}"
+      name="provinsi"
+      class="form-select"
+    >
+      <option
+        th:each="provinsi : ${provinsi}"
+        th:value="${provinsi}"
+        th:text="${provinsi}"
+      ></option>
+    </select>
+  </div>
 
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Pekerjaan</h6>
-        <select type="text" th:value="${user.pekerjaan}" name="pekerjaan" class="form-select">
-            <option th:each="pekerjaan : ${pekerjaan}" th:value="${pekerjaan}" th:text="${pekerjaan}"></option>
-        </select>
-    </div>
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Pekerjaan</h6>
+    <select
+      type="text"
+      th:value="${user.pekerjaan}"
+      name="pekerjaan"
+      class="form-select"
+    >
+      <option
+        th:each="pekerjaan : ${pekerjaan}"
+        th:value="${pekerjaan}"
+        th:text="${pekerjaan}"
+      ></option>
+    </select>
+  </div>
 
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Umur</h6><input th:field='${user.umur}' class="form-control" type="number"
-                                                       name="age" min="13" max="50" value="18">
-    </div>
-    <div class="mb-3">
-        <h6 style="font-weight: bold;">Password</h6><input th:field='${user.password}' class="shadow-sm form-control"
-                                                           type="password" name="password" placeholder="Password">
-    </div>
-    <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password_repeat"
-                             placeholder="Repeat Password"></div>
-    <div class="mb-5">
-        <button class="btn btn-primary shadow" type="submit">Kirim</button>
-    </div>
-    <div th:if="${param.success}">
-        <div class="alert alert-success" role="alert">
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Umur</h6>
+    <input
+      th:field="${user.umur}"
+      class="form-control"
+      type="number"
+      name="age"
+      min="13"
+      max="50"
+      value="18"
+    />
+  </div>
+  <div class="mb-3">
+    <h6 style="font-weight: bold">Password</h6>
+    <input
+      th:field="${user.password}"
+      class="shadow-sm form-control"
+      type="password"
+      name="password"
+      placeholder="Password"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      class="shadow-sm form-control"
+      type="password"
+      name="password_repeat"
+      placeholder="Repeat Password"
+    />
+  </div>
+  <div class="mb-5">
+    <button class="btn btn-primary shadow" type="submit">Kirim</button>
+  </div>
+  <div th:if="${param.success}">
+    <script>
+      $(document).ready(function () {
+        $("#customModal").modal("show");
+      });
+    </script>
+  </div>
+  <div
+    id="customModal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div style="background: none; border: none" class="modal-content">
+        <div style="background: none; border: none" class="modal-body">
+          <div class="alert alert-success" role="alert">
             <p class="text-center">Akun berhasil dibuat!</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>

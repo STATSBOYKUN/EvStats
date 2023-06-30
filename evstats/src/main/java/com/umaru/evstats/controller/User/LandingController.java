@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class LandingController {
     @Autowired
     private UserService usersService;
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -23,28 +23,28 @@ public class LandingController {
 
     @GetMapping("/home")
     public String home(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/index";
     }
 
     @GetMapping("/events")
     public String events(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/events";
     }
 
     @GetMapping("/komunitas")
     public String komunitas(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/komunitas";
     }
 
     @GetMapping("/bantuan")
     public String bantuan(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/bantuan";
     }

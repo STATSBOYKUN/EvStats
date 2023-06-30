@@ -28,7 +28,7 @@ public class AdminController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -36,14 +36,14 @@ public class AdminController {
 
     @GetMapping("/admin/dashboard")
     public String dashboard(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/admin/admin_dashboard";
     }
 
     @GetMapping("/admin/tickets")
     public String tickets(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<TicketDto> tickets = ticketsService.getTickets();
         model.addAttribute("tickets", tickets);
@@ -52,7 +52,7 @@ public class AdminController {
 
     @GetMapping("/admin/users")
     public String users(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<UserDto> users = usersService.getUsers();
         model.addAttribute("users", users);
@@ -61,7 +61,7 @@ public class AdminController {
 
     @GetMapping("/admin/events")
     public String events(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);

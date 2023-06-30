@@ -25,7 +25,7 @@ public class EventsController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -33,7 +33,7 @@ public class EventsController {
 
     @GetMapping("/events/{eventId}")
     public String events(ModelMap model, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         model.addAttribute("event", event);
@@ -43,7 +43,7 @@ public class EventsController {
 
     @GetMapping("/events/list")
     public String events_list(ModelMap model){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);
@@ -52,7 +52,7 @@ public class EventsController {
 
     @GetMapping("/events/tickets/{eventId}")
     public String events_tickets(ModelMap model, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         model.addAttribute("ticket", new TicketDto());

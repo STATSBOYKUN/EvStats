@@ -30,7 +30,7 @@ public class AdminTicketController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -38,7 +38,7 @@ public class AdminTicketController {
 
     @GetMapping("/admin/tickets/{ticketId}")
     public String viewTicket(ModelMap model, @PathVariable Long ticketId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         model.addAttribute("ticket", ticket);
@@ -47,7 +47,7 @@ public class AdminTicketController {
 
     @GetMapping("/admin/tickets/{ticketId}/edit")
     public String editTicket(ModelMap model, @PathVariable Long ticketId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         if (ticket == null) {
@@ -60,7 +60,7 @@ public class AdminTicketController {
 
     @RequestMapping(value = "/admin/tickets/create/{eventId}", method = RequestMethod.POST)
     public RedirectView storeTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         try {
             EventDto event = eventsService.getEvent(eventId);
@@ -75,7 +75,7 @@ public class AdminTicketController {
 
     @RequestMapping(value = "/admin/tickets/edit", method = RequestMethod.POST)
     public RedirectView editTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         ticketsService.saveTicket(ticketDto);
         model.addAttribute("ticket", ticketDto);

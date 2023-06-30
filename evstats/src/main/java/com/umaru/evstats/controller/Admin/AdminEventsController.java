@@ -24,7 +24,7 @@ public class AdminEventsController {
     @Autowired
     private UserService usersService;
 
-    private String getLogedInUsername() {
+    private String getUserLogin() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -38,7 +38,7 @@ public class AdminEventsController {
 
     @GetMapping("/admin/events/{eventId}")
     public String viewEvent(ModelMap model, @PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         model.addAttribute("event", event);
@@ -47,7 +47,7 @@ public class AdminEventsController {
 
     @GetMapping("/admin/events/{eventId}/edit")
     public String editEvent(ModelMap model, @PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         if (event == null) {
@@ -60,7 +60,7 @@ public class AdminEventsController {
 
     @RequestMapping(value = "/admin/events/create", method = RequestMethod.POST)
     public RedirectView storeEvent(ModelMap model, @ModelAttribute("event") EventDto eventDto, @RequestParam("imageFile") MultipartFile imageFile){
-        User user= usersService.findUserByEmail(getLogedInUsername());
+        User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         model.addAttribute("event", eventDto);
         try {

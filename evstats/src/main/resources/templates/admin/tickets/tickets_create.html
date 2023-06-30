@@ -1,149 +1,242 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>Tiket - EvStats</title>
-    <link rel="icon" th:href="@{/img/icon/stis.png}">
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/Raleway.css}">
-    <link rel="stylesheet" th:href="@{/css/swiper-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/Simple-Slider-swiper-bundle.min.css}">
-    <link rel="stylesheet" th:href="@{/css/Simple-Slider.css}">
-    <link rel="stylesheet" th:href="@{/css/Team-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/Team-images.css}">
-</head>
+    <link rel="icon" th:href="@{/img/icon/stis.png}" />
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/Raleway.css}" />
+    <link rel="stylesheet" th:href="@{/css/swiper-icons.css}" />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/Simple-Slider-swiper-bundle.min.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/Simple-Slider.css}" />
+    <link rel="stylesheet" th:href="@{/css/Team-icons.css}" />
+    <link rel="stylesheet" th:href="@{/css/Team-images.css}" />
+  </head>
 
-<body>
-<!-- Start: Contact Details -->
-<section class="py-5 mt-5">
-    <form method="post" enctype="multipart/form-data" th:object='${ticket}' th:action="@{/admin/tickets/create/{eventId}(eventId=${event.id})}">
+  <body>
+    <!-- Start: Contact Details -->
+    <section class="py-5 mt-5">
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        th:object="${ticket}"
+        th:action="@{/admin/tickets/create/{eventId}(eventId=${event.id})}"
+      >
         <div class="container py-5">
-            <div class="row">
-                <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2 class="display-6 fw-bold mb-4">Tiket :&nbsp;<span class="underline"
-                                                                          th:text="${event.name}"></span></h2>
-                    <p class="text-muted">Time left :&nbsp;<span style="font-weight: bold;">08:00</span></p>
-                </div>
+          <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+              <h2 class="display-6 fw-bold mb-4">
+                Tiket :&nbsp;<span
+                  class="underline"
+                  th:text="${event.name}"
+                ></span>
+              </h2>
+              <p class="text-muted">
+                Time left :&nbsp;<span style="font-weight: bold">08:00</span>
+              </p>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h4 class="fw-bold" style="text-align: left;"><br><span
-                            style="color: rgb(51, 51, 51);">Order Tiket</span></h4>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h4 class="fw-bold" style="text-align: left">
+                <br /><span style="color: rgb(51, 51, 51)">Order Tiket</span>
+              </h4>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="carousel slide" data-bs-ride="false" id="carousel-1">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="img-responsive w-100 d-block"
-                                     th:src="@{/poster/{posterName}(posterName=${event.poster})}"
-                                     alt="Slide Image">
-                            </div>
-                        </div>
-                        <div>
-                            <!-- Start: Previous --><a class="carousel-control-prev" href="#carousel-1" role="button"
-                                                       data-bs-slide="prev"><span
-                                class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a>
-                            <!-- End: Previous -->
-                            <!-- Start: Next --><a class="carousel-control-next" href="#carousel-1" role="button"
-                                                   data-bs-slide="next"><span class="carousel-control-next-icon"></span><span
-                                class="visually-hidden">Next</span></a><!-- End: Next -->
-                        </div>
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0"
-                                    class="active"></button>
-                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button>
-                        </div>
-                    </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="carousel slide" data-bs-ride="false" id="carousel-1">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      class="img-responsive w-100 d-block"
+                      th:src="@{/poster/{posterName}(posterName=${event.poster})}"
+                      alt="Slide Image"
+                    />
+                  </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 p-xl-4" style="padding-top: 0px;margin-top: -45px;">
-                        <div class="col">
-                            <h6 class="fw-bold" style="text-align: left;"><br><span style="color: rgb(51, 51, 51);">Nama Lengkap</span>
-                            </h6>
-                        </div><!-- Start: Success Example -->
-                        <div class="mb-3">
-                            <input th:field='${ticket.name}' class="shadow form-control" type="text" name="name"
-                                   placeholder="Full Name">
-                            <input th:field='${ticket.id}' type="hidden" name="id">
-                            <input th:field='${ticket.event}' type="hidden" th:attr="value = ${event.name}" name="eventName">
-                        </div><!-- End: Success Example -->
-                        <div class="col">
-                            <h6 class="fw-bold" style="text-align: left;">Jumlah Tiket</h6>
-                        </div>
-                        <input th:field='${ticket.tickets}' class="form-control shadow" type="number" id="tickets" name="tickets"
-                               min="1" max="5" value="1">
-                        <div class="mb-3"></div>
-                        <h6 class="fw-bold" style="text-align: left;">Bukti Pembayaran</h6><input
-                            class="form-control" type="file" name="imageFile" style="margin-bottom: 15px;"><a
-                            href="#" style="font-weight: bold;color: var(--bs-body-color);text-decoration: underline;">Tutorial
-                        Pembayaran</a>
-                        <div></div>
-                    </div>
+                <div>
+                  <!-- Start: Previous --><a
+                    class="carousel-control-prev"
+                    href="#carousel-1"
+                    role="button"
+                    data-bs-slide="prev"
+                    ><span class="carousel-control-prev-icon"></span
+                    ><span class="visually-hidden">Previous</span></a
+                  >
+                  <!-- End: Previous -->
+                  <!-- Start: Next --><a
+                    class="carousel-control-next"
+                    href="#carousel-1"
+                    role="button"
+                    data-bs-slide="next"
+                    ><span class="carousel-control-next-icon"></span
+                    ><span class="visually-hidden">Next</span></a
+                  ><!-- End: Next -->
                 </div>
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#carousel-1"
+                    data-bs-slide-to="0"
+                    class="active"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carousel-1"
+                    data-bs-slide-to="1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carousel-1"
+                    data-bs-slide-to="2"
+                  ></button>
+                </div>
+              </div>
             </div>
-            <div class="row">
+            <div class="col">
+              <div
+                class="p-3 p-xl-4"
+                style="padding-top: 0px; margin-top: -45px"
+              >
                 <div class="col">
-                    <hr>
+                  <h6 class="fw-bold" style="text-align: left">
+                    <br /><span style="color: rgb(51, 51, 51)"
+                      >Nama Lengkap</span
+                    >
+                  </h6>
                 </div>
+                <!-- Start: Success Example -->
+                <div class="mb-3">
+                  <input
+                    th:field="${ticket.name}"
+                    class="shadow form-control"
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                  />
+                  <input th:field="${ticket.id}" type="hidden" name="id" />
+                  <input
+                    th:field="${ticket.event}"
+                    type="hidden"
+                    th:attr="value = ${event.name}"
+                    name="eventName"
+                  />
+                </div>
+                <!-- End: Success Example -->
+                <div class="col">
+                  <h6 class="fw-bold" style="text-align: left">Jumlah Tiket</h6>
+                </div>
+                <input
+                  th:field="${ticket.tickets}"
+                  class="form-control shadow"
+                  type="number"
+                  id="tickets"
+                  name="tickets"
+                  min="1"
+                  max="5"
+                  value="1"
+                />
+                <div class="mb-3"></div>
+                <h6 class="fw-bold" style="text-align: left">
+                  Bukti Pembayaran
+                </h6>
+                <input
+                  class="form-control"
+                  type="file"
+                  name="imageFile"
+                  style="margin-bottom: 15px"
+                /><a
+                  href="#"
+                  style="
+                    font-weight: bold;
+                    color: var(--bs-body-color);
+                    text-decoration: underline;
+                  "
+                  >Tutorial Pembayaran</a
+                >
+                <div></div>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-xxl-12">
-                    <h6 class="fw-bold" style="text-align: left;">Detail Pembayaran</h6>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <hr />
             </div>
-            <div class="row">
-                <div class="col">
-                    <p class="text-muted">Tiket</p>
-                </div>
-                <div class="col">
-                    <p class="text-muted" id="ticket-price" th:text="${event.price}" style="text-align: right;"></p>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-xxl-12">
+              <h6 class="fw-bold" style="text-align: left">
+                Detail Pembayaran
+              </h6>
             </div>
-            <div class="row">
-                <div class="col">
-                    <p class="text-muted">Pajak</p>
-                </div>
-                <div class="col">
-                    <p class="text-muted" style="text-align: right;">Rp 0,00</p>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="text-muted">Tiket</p>
             </div>
-            <div class="row">
-                <div class="col">
-                    <p class="text-muted">Kode Pembayaran</p>
-                </div>
-                <div class="col">
-                    <p class="text-muted" style="text-align: right;">Rp 11,00</p>
-                </div>
+            <div class="col">
+              <p
+                class="text-muted"
+                id="ticket-price"
+                th:text="${event.price}"
+                style="text-align: right"
+              ></p>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h6 class="fw-bold" style="text-align: left;">Total</h6>
-                </div>
-                <div class="col">
-                    <h6 class="fw-bold" id="total" style="text-align: right;">Rp 0.011,00</h6>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="text-muted">Pajak</p>
             </div>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col">
-                    <button class="btn btn-primary shadow d-block w-100" type="submit">Kirim</button>
-                </div>
-                <div class="col"></div>
+            <div class="col">
+              <p class="text-muted" style="text-align: right">Rp 0,00</p>
             </div>
-
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="text-muted">Kode Pembayaran</p>
+            </div>
+            <div class="col">
+              <p class="text-muted" style="text-align: right">Rp 11,00</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6 class="fw-bold" style="text-align: left">Total</h6>
+            </div>
+            <div class="col">
+              <h6 class="fw-bold" id="total" style="text-align: right">
+                Rp 0.011,00
+              </h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <button
+                class="btn btn-primary shadow d-block w-100"
+                type="submit"
+              >
+                Kirim
+              </button>
+            </div>
+            <div class="col"></div>
+          </div>
         </div>
-    </form>
-</section><!-- End: Contact Details -->
-<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/Simple-Slider-swiper-bundle.min.js}"></script>
-<script th:src="@{/js/Simple-Slider.js}"></script>
-<script th:src="@{/js/startup-modern.js}"></script>
-<script th:src="@{/js/payment-info.js}"></script>
-</body>
-
+      </form>
+    </section>
+    <!-- End: Contact Details -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/Simple-Slider-swiper-bundle.min.js}"></script>
+    <script th:src="@{/js/Simple-Slider.js}"></script>
+    <script th:src="@{/js/startup-modern.js}"></script>
+    <script th:src="@{/js/payment-info.js}"></script>
+  </body>
 </html>
