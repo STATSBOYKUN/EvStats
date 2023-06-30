@@ -2,10 +2,13 @@ package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
 public interface UserService {
+
     void saveUser(UserDto userDto);
 
     User findUserByEmail(String email);

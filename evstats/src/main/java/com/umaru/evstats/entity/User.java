@@ -58,10 +58,13 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public User(String username, String email, String password, List<Role> roles) {
+    public User(String username, String email, String password, String provinsi, String pekerjaan, Integer umur,  List<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.provinsi = provinsi;
+        this.pekerjaan = pekerjaan;
+        this.umur = umur;
         if (roles != null) {
             this.roles = roles;
         } else {

@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("name")
-@RequestMapping("/user/")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserService usersService;
 
-    private String getLogedinUsername() {
+    private String getLogedInUsername() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
@@ -26,8 +25,8 @@ public class UserController {
 
     @GetMapping("/")
     public String registrationForm(ModelMap model) {
-        User user = userService.findUserByEmail(getLogedinUsername());
-            model.put("user", user);
-            return "user";
+        User user= usersService.findUserByEmail(getLogedInUsername());
+        model.put("user", user);
+        return "/landing/index";
     }
 }

@@ -1,12 +1,17 @@
 package com.umaru.evstats.controller.Admin;
 
+import com.umaru.evstats.entity.User;
+
 import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
+import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
@@ -14,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.io.IOException;
 
 @Controller
+@SessionAttributes("name")
 public class AdminTicketController {
     @Autowired
     private TicketService ticketsService;
@@ -21,15 +27,28 @@ public class AdminTicketController {
     @Autowired
     private EventService eventsService;
 
+    @Autowired
+    private UserService usersService;
+
+    private String getLogedInUsername() {
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
+
     @GetMapping("/admin/tickets/{ticketId}")
-    public String viewTicket(Model model, @PathVariable Long ticketId) {
+    public String viewTicket(ModelMap model, @PathVariable Long ticketId) {
+        User user= usersService.findUserByEmail(getLogedInUsername());
+        model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         model.addAttribute("ticket", ticket);
         return "/admin/tickets/tickets_view";
     }
 
     @GetMapping("/admin/tickets/{ticketId}/edit")
-    public String editTicket(Model model, @PathVariable Long ticketId) {
+    public String editTicket(ModelMap model, @PathVariable Long ticketId) {
+        User user= usersService.findUserByEmail(getLogedInUsername());
+        model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         if (ticket == null) {
             return "/admin/admin_tickets";
@@ -40,7 +59,9 @@ public class AdminTicketController {
     }
 
     @RequestMapping(value = "/admin/tickets/create/{eventId}", method = RequestMethod.POST)
-    public RedirectView storeTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId){
+    public RedirectView storeTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId){
+        User user= usersService.findUserByEmail(getLogedInUsername());
+        model.put("user", user);
         try {
             EventDto event = eventsService.getEvent(eventId);
             ticketDto.setEvent(event.getName());
@@ -53,7 +74,9 @@ public class AdminTicketController {
     }
 
     @RequestMapping(value = "/admin/tickets/edit", method = RequestMethod.POST)
-    public RedirectView editTicket(Model model, @ModelAttribute("ticket") TicketDto ticketDto){
+    public RedirectView editTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto){
+        User user= usersService.findUserByEmail(getLogedInUsername());
+        model.put("user", user);
         ticketsService.saveTicket(ticketDto);
         model.addAttribute("ticket", ticketDto);
 

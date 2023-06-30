@@ -1,9 +1,6 @@
 package com.umaru.evstats.service;
 
-import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.entity.Ticket;
-import com.umaru.evstats.mapper.TicketMapper;
 import com.umaru.evstats.mapper.UserMapper;
 import com.umaru.evstats.entity.Role;
 import com.umaru.evstats.entity.User;
@@ -11,6 +8,9 @@ import com.umaru.evstats.repository.RoleRepository;
 import com.umaru.evstats.repository.UserRepository;
 import com.umaru.evstats.util.TbConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +29,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @Override
     public void saveUser(UserDto userDto) {
         Role role = roleRepository.findByName(TbConstants.Roles.USER);
@@ -36,17 +40,17 @@ public class UserServiceImpl implements UserService {
         if (role == null)
             role = roleRepository.save(new Role(TbConstants.Roles.USER));
 
-        User user;
-        user = new User(
+        User user = new User(
                 userDto.getUsername(),
                 userDto.getEmail(),
-                userDto.getPassword(),
+                passwordEncoder.encode(userDto.getPassword()),
+                userDto.getProvinsi(),
+                userDto.getPekerjaan(),
+                userDto.getUmur(),
                 Arrays.asList(role)
         );
 
-        User userFull = UserMapper.mapToUser(userDto);
-
-        userRepository.save(userFull);
+        userRepository.save(user);
     }
 
     @Override
