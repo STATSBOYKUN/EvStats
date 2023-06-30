@@ -1,6 +1,5 @@
 package com.umaru.evstats.util;
 
-
 public class TbConstants {
         public static interface Roles {
         String USER = "ROLE_USER";

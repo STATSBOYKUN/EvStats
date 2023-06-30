@@ -99,13 +99,4 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    @Override
-    public UserDto findUserDtoByEmail(String email) {
-        return mapToUserDto(userRepository.findByEmail(email)) ;
-    }
-
-    @Override
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
 }

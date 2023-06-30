@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("name")
-public class HomeController {
+public class LoginController {
     @Autowired
     private UserService usersService;
 

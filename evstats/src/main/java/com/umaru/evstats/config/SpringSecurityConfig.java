@@ -1,5 +1,6 @@
 package com.umaru.evstats.config;
 
+import com.umaru.evstats.repository.UserRepository;
 import com.umaru.evstats.service.UserService;
 import com.umaru.evstats.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,12 +25,9 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
+@EnableJpaRepositories(basePackageClasses = UserRepository.class)
 @Order(1)
 public class SpringSecurityConfig {
-    @Bean
-    public UserService userService() {
-        return new UserServiceImpl();
-    }
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
