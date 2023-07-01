@@ -1,7 +1,9 @@
 package com.umaru.evstats.mapper;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.FavoriteDto;
 import com.umaru.evstats.entity.Event;
+import com.umaru.evstats.entity.Favorite;
 
 public class EventMapper {
     public static EventDto mapToEventDto(Event event) {
@@ -35,5 +37,23 @@ public class EventMapper {
                 .poster(eventDto.getPoster())
                 .build();
         return event;
+    }
+
+    public static FavoriteDto mapToFavoriteDto(Favorite favorite) {
+        FavoriteDto favoriteDto = FavoriteDto.builder()
+                .id(favorite.getId())
+                .userId(favorite.getUserId())
+                .eventId(favorite.getEventId())
+                .build();
+        return favoriteDto;
+    }
+
+    public static Favorite mapToFavorite(FavoriteDto favoriteDto) {
+        Favorite favorite = Favorite.builder()
+                .id(favoriteDto.getId())
+                .userId(favoriteDto.getUserId())
+                .eventId(favoriteDto.getEventId())
+                .build();
+        return favorite;
     }
 }

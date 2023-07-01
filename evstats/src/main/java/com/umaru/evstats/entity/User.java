@@ -40,7 +40,7 @@ public class User {
     @Column(nullable = false)
     private Integer umur;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date createdAt;
@@ -50,12 +50,14 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date updatedAt;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
+
+
     private List<Role> roles = new ArrayList<>();
 
     public User(String username, String email, String password, String provinsi, String pekerjaan, Integer umur,  List<Role> roles) {

@@ -77,5 +77,19 @@ public class AdminEventsController {
         return new RedirectView("/admin/events");
     }
 
+    @RequestMapping(value = "/events/favorite/{eventId}/create", method = RequestMethod.POST)
+    public RedirectView favoriteEvent(@PathVariable Long eventId) {
+        User user= usersService.findUserByEmail(getUserLogin());
+
+        usersService.favoriteEvent(user.getId(), eventId);
+        return new RedirectView("/events/" + eventId.toString());
+    }
+
+    @RequestMapping(value = "/events/favorite/{eventId}/delete", method = RequestMethod.POST)
+    public RedirectView deleteFavoritedEvent(@PathVariable Long eventId) {
+        User user= usersService.findUserByEmail(getUserLogin());
+        usersService.deleteFavoritedEvent(user.getId(), eventId);
+        return new RedirectView("/events/" + eventId.toString());
+    }
 
 }

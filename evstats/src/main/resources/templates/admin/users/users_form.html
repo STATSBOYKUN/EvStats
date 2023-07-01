@@ -2,7 +2,7 @@
   method="post"
   data-bs-theme="light"
   role="form"
-  th:action="@{/signup}"
+  th:action="@{/admin/users/edit}"
   th:object="${user}"
 >
   <div class="mb-3">
@@ -15,6 +15,7 @@
       placeholder="Email"
     />
     <input th:field="${user.id}" type="hidden" name="id" />
+    <input th:field="${user.createdAt}" type="hidden" name="createdAt" th:value="${user.createdAt}"/>
   </div>
   <div class="mb-3">
     <h6 style="font-weight: bold">Username</h6>
@@ -109,7 +110,7 @@
       <div style="background: none; border: none" class="modal-content">
         <div style="background: none; border: none" class="modal-body">
           <div class="alert alert-success" role="alert">
-            <p class="text-center">Akun berhasil dibuat!</p>
+            <p class="text-center">Akun berhasil diubah!</p>
           </div>
         </div>
       </div>

@@ -181,34 +181,45 @@
       <!-- Start: Projects Grid -->
       <div class="container py-4 py-xl-5">
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-          <div class="col">
+          <div class="col" th:each="event : ${events}">
             <div>
               <img
-                class="rounded img-fluid d-block w-100 fit-cover"
-                style="height: 200px"
-                th:src="@{https://cdn.bootstrapstudio.io/placeholders/1400x800.png}"
+                      class="rounded img-fluid d-block w-100 fit-cover"
+                      style="height: 200px"
+                      th:src="@{/poster/{posterName}(posterName=${event.poster})}"
               />
               <div class="py-4">
-                <h4 style="font-weight: bold">Animisc</h4>
+                <h4 style="font-weight: bold" th:text="${event.name}"></h4>
                 <h4
-                  style="
+                        style="
                     font-size: 16px;
                     font-weight: bold;
                     color: var(--bs-danger-text-emphasis);
                   "
-                >
-                  Rabu, 16 Juni 2023
-                </h4>
-                <p>
-                  Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                  justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                  id elit non mi porta gravida at eget metus.
-                </p>
+                        th:text="${#temporals.format(event.date, 'EEEE, d MMMM yyyy')}"
+                ></h4>
+                <p th:text="${event.thumbnail}"></p>
                 <a
-                  href="#"
-                  style="color: var(--bs-body-color); font-weight: bold"
-                  >Selengkapnya &gt;&gt;</a
-                >
+                        class="fw-bold mb-3"
+                        th:href="@{/events/{id}(id=${event.id})}"
+                >Selengkapnya
+                  <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <line x1="15" y1="16" x2="19" y2="12"></line>
+                    <line x1="15" y1="8" x2="19" y2="12"></line></svg
+                  ></a>
               </div>
             </div>
           </div>

@@ -1,72 +1,192 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Daftar - EvStats</title>
-    <link rel="icon" th:href="@{/img/icon/stis.png}" />
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/Raleway.css}" />
-    <link rel="stylesheet" th:href="@{/css/Team-icons.css}" />
-    <link rel="stylesheet" th:href="@{/css/Team-images.css}" />
+    <link rel="icon" th:href="@{/img/icon/stis.png}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/Raleway.css}"/>
+    <link rel="stylesheet" th:href="@{/css/Team-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/Team-images.css}"/>
     <script
-      th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
+            th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
     ></script>
     <script
-      th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
     ></script>
     <script
-      th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
     ></script>
-  </head>
+</head>
 
-  <body>
-    <section class="py-4 py-md-5 my-5">
-      <div
-        class="container py-md-5"
-        style="padding-top: 70px; margin-top: -77px"
-      >
+<body>
+<section class="py-4 py-md-5 my-5">
+    <div
+            class="container py-md-5"
+            style="padding-top: 70px; margin-top: -77px"
+    >
         <div class="row">
-          <div class="col-md-6 col-xl-7 text-center">
-            <img
-              class="img-fluid w-100"
-              th:src="@{/img/illustrations/register.svg}"
-            />
-          </div>
-          <div class="col-md-5 col-xl-4 text-center text-md-start">
-            <h2 class="display-6 fw-bold mb-5">
-              <span class="underline pb-1"><strong>Sign up</strong></span>
-            </h2>
-            <div th:insert="admin/users/users_form :: form"></div>
-            <p class="text-muted">
-              Sudah punya akun?
-              <a th:href="@{/user_login}"
-                >Login&nbsp;<svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-arrow-narrow-right"
+            <div class="col-md-6 col-xl-7 text-center">
+                <img
+                        class="img-fluid w-100"
+                        th:src="@{/img/illustrations/register.svg}"
+                />
+            </div>
+            <div class="col-md-5 col-xl-4 text-center text-md-start">
+                <h2 class="display-6 fw-bold mb-5">
+                    <span class="underline pb-1"><strong>Sign up</strong></span>
+                </h2>
+                <form
+                        method="post"
+                        data-bs-theme="light"
+                        role="form"
+                        th:action="@{/signup}"
+                        th:object="${user}"
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <line x1="15" y1="16" x2="19" y2="12"></line>
-                  <line x1="15" y1="8" x2="19" y2="12"></line></svg></a
-              >&nbsp;
-            </p>
-          </div>
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Email</h6>
+                        <input
+                                th:field="${user.email}"
+                                class="shadow-sm form-control"
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                        />
+                        <input th:field="${user.id}" type="hidden" name="id"/>
+                    </div>
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Username</h6>
+                        <input
+                                th:field="${user.username}"
+                                class="form-control"
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Provinsi</h6>
+                        <select
+                                type="text"
+                                th:value="${user.provinsi}"
+                                name="provinsi"
+                                class="form-select"
+                        >
+                            <option
+                                    th:each="provinsi : ${provinsi}"
+                                    th:value="${provinsi}"
+                                    th:text="${provinsi}"
+                            ></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Pekerjaan</h6>
+                        <select
+                                type="text"
+                                th:value="${user.pekerjaan}"
+                                name="pekerjaan"
+                                class="form-select"
+                        >
+                            <option
+                                    th:each="pekerjaan : ${pekerjaan}"
+                                    th:value="${pekerjaan}"
+                                    th:text="${pekerjaan}"
+                            ></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Umur</h6>
+                        <input
+                                th:field="${user.umur}"
+                                class="form-control"
+                                type="number"
+                                name="age"
+                                min="13"
+                                max="50"
+                                value="18"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <h6 style="font-weight: bold">Password</h6>
+                        <input
+                                th:field="${user.password}"
+                                class="shadow-sm form-control"
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <input
+                                class="shadow-sm form-control"
+                                type="password"
+                                name="password_repeat"
+                                placeholder="Repeat Password"
+                        />
+                    </div>
+                    <div class="mb-5">
+                        <button class="btn btn-primary shadow" type="submit">Kirim</button>
+                    </div>
+                    <div th:if="${param.success}">
+                        <script>
+                            $(document).ready(function () {
+                                $("#customModal").modal("show");
+                            });
+                        </script>
+                    </div>
+                    <div
+                            id="customModal"
+                            class="modal fade"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div style="background: none; border: none" class="modal-content">
+                                <div style="background: none; border: none" class="modal-body">
+                                    <div class="alert alert-success" role="alert">
+                                        <p class="text-center">Akun berhasil dibuat!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="text-muted">
+                    Sudah punya akun?
+                    <a th:href="@{/login}"
+                    >Login&nbsp;<svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icon-tabler-arrow-narrow-right"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <line x1="15" y1="16" x2="19" y2="12"></line>
+                        <line x1="15" y1="8" x2="19" y2="12"></line>
+                    </svg>
+                    </a
+                    >&nbsp;
+                </p>
+            </div>
         </div>
-      </div>
-    </section>
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/startup-modern.js}"></script>
-  </body>
+    </div>
+</section>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/startup-modern.js}"></script>
+</body>
 </html>
