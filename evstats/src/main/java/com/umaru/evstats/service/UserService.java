@@ -14,7 +14,6 @@ public interface UserService {
     public void updateUser(UserDto userDto);
     public User findUserByEmail(String email);
     public List<UserDto> getUsers();
-    public List<UserDto> getUsersUser();
 
     public UserDto getUser(Long userId);
     public void deleteUser(Long userId);
@@ -22,5 +21,6 @@ public interface UserService {
     public void favoriteEvent(Long userId, Long eventId);
     public List<FavoriteDto> getFavoritedEvent();
     public void deleteFavoritedEvent(Long userId, Long eventId);
-    public int getJmlUser();
+    public void deleteFavoritedEventByUser(Long userId);
+    public void deleteFavoritedEventByEvent(Long eventId);
 }

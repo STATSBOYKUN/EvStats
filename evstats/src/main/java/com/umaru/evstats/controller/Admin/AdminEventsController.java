@@ -1,6 +1,7 @@
 package com.umaru.evstats.controller.Admin;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.FavoriteDto;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @SessionAttributes("name")
@@ -32,7 +34,9 @@ public class AdminEventsController {
 
     @GetMapping("/admin/events/create")
     public String createEvent(ModelMap model){
+        User user= usersService.findUserByEmail(getUserLogin());
         model.addAttribute("event", new EventDto());
+        model.put("user", user);
         return "/admin/events/events_create";
     }
 
@@ -73,6 +77,14 @@ public class AdminEventsController {
 
     @RequestMapping(value = "/admin/events/{eventId}/delete", method = RequestMethod.POST)
     public RedirectView deleteEvent(@PathVariable Long eventId) {
+        List<FavoriteDto> favoriteDto = usersService.getFavoritedEvent();
+        if (favoriteDto != null) {
+            for (FavoriteDto favorite : favoriteDto) {
+                if (favorite.getEventId() == eventId) {
+                    usersService.deleteFavoritedEventByEvent(eventId);
+                }
+            }
+        }
         eventsService.deleteEvent(eventId);
         return new RedirectView("/admin/events");
     }

@@ -1,6 +1,7 @@
 package com.umaru.evstats.controller.Admin;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.FavoriteDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.dto.UserDto;
@@ -71,6 +72,14 @@ public class AdminUsersController {
 
     @RequestMapping(value = "/admin/users/{userId}/delete", method = RequestMethod.POST)
     public RedirectView deleteUser(@PathVariable Long userId) {
+        List<FavoriteDto> favoriteDto = usersService.getFavoritedEvent();
+        if (favoriteDto != null) {
+            for (FavoriteDto favorite : favoriteDto) {
+                if (favorite.getUserId() == userId) {
+                    usersService.deleteFavoritedEventByUser(userId);
+                }
+            }
+        }
         usersService.deleteUser(userId);
         return new RedirectView("/admin/users");
     }
