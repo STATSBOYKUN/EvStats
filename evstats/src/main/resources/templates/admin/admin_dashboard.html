@@ -12,6 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/Nunito.css}" />
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}" />
     <link rel="stylesheet" th:href="@{/css/untitled.css}" />
+    <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js}"></script>
   </head>
 
   <body
@@ -28,13 +29,6 @@
               class="d-sm-flex justify-content-between align-items-center mb-4"
             >
               <h3 class="text-dark mb-0">Dashboard</h3>
-              <a
-                class="btn btn-primary btn-sm d-none d-sm-inline-block"
-                role="button"
-                href="#"
-                ><i class="fas fa-download fa-sm text-white-50"></i
-                >&nbsp;Generate Report</a
-              >
             </div>
             <div class="row">
               <div class="col-md-6 col-xl-3 mb-4">
@@ -45,10 +39,10 @@
                         <div
                           class="text-uppercase text-primary fw-bold text-xs mb-1"
                         >
-                          <span>ACTIVE USERS</span>
+                          <span>EVENTS</span>
                         </div>
                         <div class="text-dark fw-bold h5 mb-0">
-                          <span>$40,000</span>
+                          <span th:text="${jumlahEvent}"></span>
                         </div>
                       </div>
                       <div class="col-auto">
@@ -66,14 +60,14 @@
                         <div
                           class="text-uppercase text-success fw-bold text-xs mb-1"
                         >
-                          <span>TOTAL TICKET SOLD</span>
+                          <span>TOTAL TIKET</span>
                         </div>
                         <div class="text-dark fw-bold h5 mb-0">
-                          <span>$215,000</span>
+                          <span th:text="${jumlahTicket}"></span>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -92,7 +86,7 @@
                         <div class="row g-0 align-items-center">
                           <div class="col-auto">
                             <div class="text-dark fw-bold h5 mb-0 me-3">
-                              <span>50%</span>
+                              <span th:text="${jumlahUser}"></span>
                             </div>
                           </div>
                         </div>
@@ -112,31 +106,18 @@
                         <div
                           class="text-uppercase text-warning fw-bold text-xs mb-1"
                         >
-                          <span>Tickets Sold</span>
+                          <span>TARGET USER (250)</span>
                         </div>
                         <div class="row g-0 align-items-center">
                           <div class="col-auto">
                             <div class="text-dark fw-bold h5 mb-0 me-3">
-                              <span>50%</span>
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="progress progress-sm">
-                              <div
-                                class="progress-bar bg-info"
-                                aria-valuenow="50"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 50%"
-                              >
-                                <span class="visually-hidden">50%</span>
-                              </div>
+                              <span th:text="${targetUser} + ' %'"></span>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -150,38 +131,86 @@
                   <div
                     class="card-header d-flex justify-content-between align-items-center"
                   >
-                    <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
-                    <div class="dropdown no-arrow">
-                      <button
-                        class="btn btn-link btn-sm dropdown-toggle"
-                        aria-expanded="false"
-                        data-bs-toggle="dropdown"
-                        type="button"
-                      >
-                        <i class="fas fa-ellipsis-v text-gray-400"></i>
-                      </button>
-                      <div
-                        class="dropdown-menu shadow dropdown-menu-end animated--fade-in"
-                      >
-                        <p class="text-center dropdown-header">
-                          dropdown header:
-                        </p>
-                        <a class="dropdown-item" href="#">&nbsp;Action</a
-                        ><a class="dropdown-item" href="#"
-                          >&nbsp;Another action</a
-                        >
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"
-                          >&nbsp;Something else here</a
-                        >
-                      </div>
-                    </div>
+                    <h6 class="text-primary fw-bold m-0">Rangkuman Pendapatan</h6>
                   </div>
                   <div class="card-body">
                     <div class="chart-area">
                       <canvas
-                        data-bss-chart='{"type":"line","data":{"labels":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],"datasets":[{"label":"Earnings","fill":true,"data":["0","10000","5000","15000","10000","20000","15000","25000"],"backgroundColor":"rgba(78, 115, 223, 0.05)","borderColor":"rgba(78, 115, 223, 1)"}]},"options":{"maintainAspectRatio":false,"legend":{"display":false,"labels":{"fontStyle":"normal"}},"title":{"fontStyle":"normal"},"scales":{"xAxes":[{"gridLines":{"color":"rgb(234, 236, 244)","zeroLineColor":"rgb(234, 236, 244)","drawBorder":false,"drawTicks":false,"borderDash":["2"],"zeroLineBorderDash":["2"],"drawOnChartArea":false},"ticks":{"fontColor":"#858796","fontStyle":"normal","padding":20}}],"yAxes":[{"gridLines":{"color":"rgb(234, 236, 244)","zeroLineColor":"rgb(234, 236, 244)","drawBorder":false,"drawTicks":false,"borderDash":["2"],"zeroLineBorderDash":["2"]},"ticks":{"fontColor":"#858796","fontStyle":"normal","padding":20}}]}}}'
+                        id="lineChart"
                       ></canvas>
+                      <script type="text/javascript" th:inline="javascript">
+                        var earningTicket = [[${earningTicket}]];
+                        var ticketDate = [[${ticketDate}]];
+
+                        const chartConfigLine = {
+                          "type": "line",
+                          "data": {
+                            "labels": ticketDate,
+                            "datasets": [
+                              {
+                                "label": "Pendapatan Rp.",
+                                "fill": true,
+                                "data": earningTicket,
+                                "backgroundColor": "rgba(78, 115, 223, 0.05)",
+                                "borderColor": "rgba(78, 115, 223, 1)"
+                              }
+                            ]
+                          },
+                          "options": {
+                            "maintainAspectRatio": false,
+                            "legend": {
+                              "display": false,
+                              "labels": {
+                                "fontStyle": "normal"
+                              }
+                            },
+                            "title": {
+                              "fontStyle": "normal"
+                            },
+                            "scales": {
+                              "xAxes": [
+                                {
+                                  "gridLines": {
+                                    "color": "rgb(234, 236, 244)",
+                                    "zeroLineColor": "rgb(234, 236, 244)",
+                                    "drawBorder": false,
+                                    "drawTicks": false,
+                                    "borderDash": ["2"],
+                                    "zeroLineBorderDash": ["2"],
+                                    "drawOnChartArea": false
+                                  },
+                                  "ticks": {
+                                    "fontColor": "#858796",
+                                    "fontStyle": "normal",
+                                    "padding": 20
+                                  }
+                                }
+                              ],
+                              "yAxes": [
+                                {
+                                  "gridLines": {
+                                    "color": "rgb(234, 236, 244)",
+                                    "zeroLineColor": "rgb(234, 236, 244)",
+                                    "drawBorder": false,
+                                    "drawTicks": false,
+                                    "borderDash": ["2"],
+                                    "zeroLineBorderDash": ["2"]
+                                  },
+                                  "ticks": {
+                                    "fontColor": "#858796",
+                                    "fontStyle": "normal",
+                                    "padding": 20
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        };
+
+                        const canvasLine = document.getElementById('lineChart');
+                        const ctxLine = canvasLine.getContext('2d');
+                        const chartLine = new Chart(ctxLine, chartConfigLine);
+                      </script>
                     </div>
                   </div>
                 </div>
@@ -191,49 +220,58 @@
                   <div
                     class="card-header d-flex justify-content-between align-items-center"
                   >
-                    <h6 class="text-primary fw-bold m-0">Ticket Summary</h6>
-                    <div class="dropdown no-arrow">
-                      <button
-                        class="btn btn-link btn-sm dropdown-toggle"
-                        aria-expanded="false"
-                        data-bs-toggle="dropdown"
-                        type="button"
-                      >
-                        <i class="fas fa-ellipsis-v text-gray-400"></i>
-                      </button>
-                      <div
-                        class="dropdown-menu shadow dropdown-menu-end animated--fade-in"
-                      >
-                        <p class="text-center dropdown-header">
-                          dropdown header:
-                        </p>
-                        <a class="dropdown-item" href="#">&nbsp;Action</a
-                        ><a class="dropdown-item" href="#"
-                          >&nbsp;Another action</a
-                        >
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"
-                          >&nbsp;Something else here</a
-                        >
-                      </div>
-                    </div>
+                    <h6 class="text-primary fw-bold m-0">Rangkuman Tiket</h6>
                   </div>
                   <div class="card-body">
                     <div class="chart-area">
                       <canvas
-                        data-bss-chart='{"type":"doughnut","data":{"labels":["Direct","Social","Referral"],"datasets":[{"label":"","backgroundColor":["#4e73df","#1cc88a","#36b9cc"],"borderColor":["#ffffff","#ffffff","#ffffff"],"data":["50","30","15"]}]},"options":{"maintainAspectRatio":false,"legend":{"display":false,"labels":{"fontStyle":"normal"}},"title":{"fontStyle":"normal"}}}'
+                        id="doughnutChart"
                       ></canvas>
+                      <script type="text/javascript" th:inline="javascript">
+                        var ticketData = [[${ticketData}]];
+
+                        const chartConfig = {
+                          type: 'doughnut',
+                          data: {
+                            labels: '',
+                            datasets: [
+                              {
+                                label: '',
+                                backgroundColor: ['#1cc88a', '#36b9cc', '#e74a3b'],
+                                borderColor: ['#ffffff', '#ffffff', '#ffffff'],
+                                data: ticketData,
+                              },
+                            ],
+                          },
+                          options: {
+                            maintainAspectRatio: false,
+                            legend: {
+                              display: false,
+                              labels: {
+                                fontStyle: 'normal',
+                              },
+                            },
+                            title: {
+                              fontStyle: 'normal',
+                            },
+                          },
+                        };
+
+                        const canvasDoughnut = document.getElementById('doughnutChart');
+                        const ctxDoughnut = canvasDoughnut.getContext('2d');
+                        const chartDoughnut = new Chart(ctxDoughnut, chartConfig);
+                      </script>
                     </div>
                     <div class="text-center small mt-4">
                       <span class="me-2"
-                        ><i class="fas fa-circle text-primary"></i
-                        >&nbsp;Direct</span
+                        ><i class="fas fa-circle text-danger"></i
+                        >&nbsp;Rejected</span
                       ><span class="me-2"
                         ><i class="fas fa-circle text-success"></i
-                        >&nbsp;Social</span
+                        >&nbsp;Approved</span
                       ><span class="me-2"
                         ><i class="fas fa-circle text-info"></i
-                        >&nbsp;Refferal</span
+                        >&nbsp;Pending</span
                       >
                     </div>
                   </div>

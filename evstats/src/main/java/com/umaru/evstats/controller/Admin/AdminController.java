@@ -4,6 +4,7 @@ import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.dto.UserDto;
+import com.umaru.evstats.entity.Event;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
@@ -15,7 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 @Controller
 @SessionAttributes("name")
@@ -39,6 +44,63 @@ public class AdminController {
     public String dashboard(ModelMap model){
         User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        List<Integer> earningTicket = new ArrayList<>();
+
+        for (TicketDto ticket : ticketsService.getTickets()) {
+            if (ticket.getStatus().equals("Approved")) {
+                for (EventDto event : eventsService.getEvents()) {
+                    if (event.getName().equals(ticket.getEvent())) {
+                        earningTicket.add(event.getPrice() * ticket.getTickets());
+                    }
+                }
+            }
+        }
+
+        model.addAttribute("earningTicket", earningTicket);
+
+        List<String> ticketDate = new ArrayList<>();
+        SimpleDateFormat DateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        for (TicketDto ticket : ticketsService.getTickets()) {
+            if (ticket.getStatus().equals("Approved")) {
+                ticketDate.add(DateFormat.format(ticket.getDate()));
+            }
+        }
+
+        model.addAttribute("ticketDate", ticketDate);
+
+        List<Integer> ticketData= new ArrayList<>();
+        int ticketApproved = 0;
+        int ticketPending = 0;
+        int ticketRejected = 0;
+
+        for (TicketDto ticket : ticketsService.getTickets()) {
+            switch (ticket.getStatus()) {
+                case "Approved" -> ticketApproved = ticketApproved + 1;
+                case "Pending" -> ticketPending = ticketPending + 1;
+                case "Rejected" -> ticketRejected = ticketRejected + 1;
+            }
+        }
+
+        ticketData.add(ticketApproved);
+        ticketData.add(ticketPending);
+        ticketData.add(ticketRejected);
+
+        model.addAttribute("ticketData", ticketData);
+
+        model.addAttribute("jumlahEvent", eventsService.getEvents().size());
+        model.addAttribute("jumlahUser", usersService.getUsers().size());
+        int jumlahTicket = 0;
+        for (TicketDto ticket : ticketsService.getTickets()) {
+            if (ticket.getStatus().equals("Approved")) {
+                jumlahTicket = jumlahTicket + ticket.getTickets();
+            }
+        }
+        model.addAttribute("jumlahTicket", jumlahTicket);
+
+        double targetUser = usersService.getUsers().size()/250;
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        model.addAttribute("targetUser", decimalFormat.format(targetUser));
+
         return "/admin/admin_dashboard";
     }
 
