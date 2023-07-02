@@ -96,15 +96,16 @@
           </div>
           <div class="col-md-6">
             <div>
-              <form class="p-3 p-xl-4" method="post" data-bs-theme="light">
+              <form class="p-3 p-xl-4" th:action="@{/admin/help/create}" th:object="${help}" method="post" data-bs-theme="light">
                 <!-- Start: Success Example -->
                 <div class="mb-3">
                   <input
                     class="shadow form-control"
                     type="text"
+                    th:field="${help.name}"
                     id="name-1"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Nama Lengkap"
                   />
                 </div>
                 <!-- End: Success Example -->
@@ -113,6 +114,7 @@
                   <input
                     class="shadow form-control"
                     type="email"
+                    th:field="${help.email}"
                     id="email-1"
                     name="email"
                     placeholder="Email"
@@ -123,9 +125,10 @@
                   <textarea
                     class="shadow form-control"
                     id="message-1"
+                    th:field="${help.message}"
                     name="message"
                     rows="6"
-                    placeholder="Message"
+                    placeholder="Sampaikan kendala secara rinci"
                   ></textarea>
                 </div>
                 <div>
@@ -133,7 +136,7 @@
                     class="btn btn-primary shadow d-block w-100"
                     type="submit"
                   >
-                    Send
+                    Kirim
                   </button>
                 </div>
               </form>

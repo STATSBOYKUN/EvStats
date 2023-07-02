@@ -1,19 +1,15 @@
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.entity.Favorite;
-import com.umaru.evstats.entity.Notification;
-import com.umaru.evstats.entity.Role;
-import com.umaru.evstats.entity.User;
+import com.umaru.evstats.entity.*;
 import com.umaru.evstats.mapper.EventMapper;
+import com.umaru.evstats.mapper.HelpMapper;
 import com.umaru.evstats.mapper.NotificationMapper;
 import com.umaru.evstats.mapper.UserMapper;
-import com.umaru.evstats.repository.FavoriteRepository;
-import com.umaru.evstats.repository.NotificationRepository;
-import com.umaru.evstats.repository.RoleRepository;
-import com.umaru.evstats.repository.UserRepository;
+import com.umaru.evstats.repository.*;
 import com.umaru.evstats.util.TbConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private FavoriteRepository favoriteRepository;
+
+    @Autowired
+    private HelpRepository helpsRepository;
 
     @Autowired
     private NotificationRepository notificationsRepository;
@@ -178,5 +177,35 @@ public class UserServiceImpl implements UserService {
             }
         }
         return notificationDtos;
+    }
+
+    @Override
+    public List<HelpDto> getHelps(){
+        List<Help> helps = helpsRepository.findAll();
+        List<HelpDto> helpDtos = helps.stream()
+                .map((help) -> (HelpMapper.mapToHelpDto(help)))
+                .collect(Collectors.toList());
+        return helpDtos;
+    }
+
+    @Override
+    public HelpDto getHelp(Long helpId) {
+        Optional<Help> helps = helpsRepository.findById(helpId);
+        if (helps.isPresent()) {
+            return HelpMapper.mapToHelpDto(helps.get());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void saveHelp(HelpDto helpDto) {
+        Help help = HelpMapper.mapToHelp(helpDto);
+        helpsRepository.save(help);
+    }
+
+    @Override
+    public void deleteHelp(Long helpId) {
+        helpsRepository.deleteById(helpId);
     }
 }

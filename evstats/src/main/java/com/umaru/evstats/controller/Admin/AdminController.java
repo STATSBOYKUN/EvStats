@@ -1,6 +1,7 @@
 package com.umaru.evstats.controller.Admin;
 
 import com.umaru.evstats.dto.EventDto;
+import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.entity.User;
@@ -66,5 +67,14 @@ public class AdminController {
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);
         return "/admin/admin_events";
+    }
+
+    @GetMapping("/admin/helps")
+    public String helps(ModelMap model){
+        User user= usersService.findUserByEmail(getUserLogin());
+        model.put("user", user);
+        List<HelpDto> helps = usersService.getHelps();
+        model.addAttribute("helps", helps);
+        return "/admin/admin_helps";
     }
 }

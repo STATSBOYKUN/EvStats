@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Users - EvStats</title>
+    <link rel="icon" th:href="@{/img/icon/stis.png}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrapAdmin.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/Nunito.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/untitled.css}"/>
+    <link rel="stylesheet" th:href="@{https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css}"/>
+    <script th:src="@{https://code.jquery.com/jquery-3.7.0.js}"></script>
+    <script th:src="@{https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js}"></script>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <div th:replace="admin/sidebar :: nav"></div>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="admin/navbar :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Bantuan</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold">Info Kendala</p>
+                    </div>
+                    <div class="card-body">
+                        <div
+                                class="table-responsive table mt-2"
+                                role="grid"
+                                aria-describedby="dataTable_info"
+                        >
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Email</th>
+                                    <th>Pesan Dibuat</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="help : ${helps}">
+                                    <td th:text="${help.id}"></td>
+                                    <td th:text="${help.name}"></td>
+                                    <td th:text="${help.email}"></td>
+                                    <td th:text="${help.date}"></td>
+                                    <td>
+                                        <a th:href="@{/admin/helps/{id}(id=${help.id})}"
+                                        ><i class="far fa-eye" style="padding: 0px 4px"></i
+                                        ></a>
+                                        <form
+                                                style="display: inline"
+                                                method="post"
+                                                th:action="@{/admin/helps/{id}/delete(id=${help.id})}"
+                                        >
+                                            <button
+                                                    style="border: none; background: none"
+                                                    type="submit"
+                                                    th:href="@{/admin/helps/{id}/delete(id=${help.id})}"
+                                            >
+                                                <i
+                                                        class="far fa-trash-alt"
+                                                        style="padding: 0px 4px"
+                                                ></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#dataTable').DataTable();
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright">
+                    <span>Copyright © 2023 EvStats</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"
+    ><i class="fas fa-angle-up"></i
+    ></a>
+</div>
+<script th:src="@{/bootstrap/js/bootstrapAdmin.min.js}"></script>
+<script th:src="@{/js/bs-init.js}"></script>
+<script th:src="@{/js/startup-modernAdmin.js}"></script>
+</body>
+</html>

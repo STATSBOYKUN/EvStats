@@ -1,6 +1,7 @@
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.entity.User;
@@ -27,4 +28,8 @@ public interface UserService {
     public List<NotificationDto> getNotifications();
     public void createNotification(Long userId, String notifications);
     public List<NotificationDto> getNotificationsByUser(Long userId);
+    public List<HelpDto> getHelps();
+    public HelpDto getHelp(Long helpId);
+    public void saveHelp(HelpDto helpDto);
+    public void deleteHelp(Long helpId);
 }

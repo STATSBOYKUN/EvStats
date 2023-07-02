@@ -1,6 +1,7 @@
 package com.umaru.evstats.controller.User;
 
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class LandingController {
     public String bantuan(ModelMap model){
         User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        model.addAttribute("help", new HelpDto());
         return "/landing/bantuan";
     }
 }

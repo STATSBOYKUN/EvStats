@@ -1,6 +1,7 @@
 package com.umaru.evstats.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TimeZoneColumn;
@@ -20,9 +21,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "events")
+@Table(name = "help")
 
-public class Event {
+public class Help {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,33 +32,13 @@ public class Event {
     private String name;
 
     @Column(nullable = false)
-    private String thumbnail;
+    private String email;
 
-    @Lob
-    @Column(nullable = false, length = 5000)
-    private String details;
-
-    @Column(nullable = false)
-    private String person;
-
-    @Lob
     @Column(nullable = false, length = 2000)
-    private String additionalDetails;
+    private String message;
 
-    @Column(nullable = false)
-    private String place;
-
-    @Column(nullable = false)
-    @UpdateTimestamp
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate date;
-
-    @Column(nullable = false)
-    private LocalTime time;
-
-    @Column(nullable = false)
-    private Integer price;
-
-    @Column(nullable = false)
-    private String poster;
+    private Date date;
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Admin - EvStats</title>
+    <link rel="icon" th:href="@{/img/icon/stis.png}" />
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrapAdmin.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/Nunito.css}" />
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/untitled.css}" />
+    <script
+      th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
+    ></script>
+    <script
+      th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+    ></script>
+    <script
+      th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+    ></script>
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <div th:replace="admin/sidebar :: nav"></div>
+      <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+          <div th:replace="admin/navbar :: nav"></div>
+          <div class="container-fluid">
+            <h3 class="text-dark mb-4">View Help</h3>
+            <div class="card shadow">
+              <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold">
+                  Help #<span th:text="${help.id}"></span>
+                </p>
+              </div>
+              <div class="row" style="padding-top: 37px">
+                <div class="col-xl-2"></div>
+                <div class="col-xl-8">
+                  <dl class="row">
+                    <dt class="col-sm-5">Nama Lengkap</dt>
+                    <dd class="col-sm-7" th:text="${help.name}"></dd>
+                    <dt class="col-sm-5">Email</dt>
+                    <dd class="col-sm-7" th:text="${help.email}"></dd>
+                    <dt class="col-sm-5">Pesan Dibuat</dt>
+                    <dd class="col-sm-7" th:text="${help.date}"></dd>
+                    <dt class="col-sm-5">Pesan</dt>
+                    <dd class="col-sm-7" th:text="${help.message}"></dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+          <div class="container my-auto">
+            <div class="text-center my-auto copyright">
+              <span>Copyright © 2023 EvStats</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <a class="border rounded d-inline scroll-to-top" href="#page-top"
+        ><i class="fas fa-angle-up"></i
+      ></a>
+    </div>
+    <script th:src="@{/bootstrap/js/bootstrapAdmin.min.js}"></script>
+    <script th:src="@{/js/bs-init.js}"></script>
+    <script th:src="@{/js/startup-modernAdmin.js}"></script>
+  </body>
+</html>
