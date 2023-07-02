@@ -2,6 +2,7 @@ package com.umaru.evstats.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,8 +36,8 @@ public class Ticket {
     @Column(nullable = false)
     private Integer tickets;
 
-    @Column(nullable = false)
-    @UpdateTimestamp
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
 

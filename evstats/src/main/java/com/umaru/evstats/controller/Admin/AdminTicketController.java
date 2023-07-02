@@ -63,6 +63,8 @@ public class AdminTicketController {
         User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         try {
+            String notification = "Tiket Anda sedang diproses, terus pantau notifikasi. Terima kasih.";
+            usersService.createNotification(user.getId(), notification);
             EventDto event = eventsService.getEvent(eventId);
             ticketDto.setEvent(event.getName());
             ticketsService.saveTickets(ticketDto, imageFile);
@@ -77,6 +79,21 @@ public class AdminTicketController {
     public RedirectView editTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto){
         User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        String notification = "";
+
+        if (ticketDto.getStatus().equals("Pending")) {
+            notification = "Tiket Anda sedang diproses, terus pantau notifikasi. Terima kasih.";
+        }
+
+        if (ticketDto.getStatus().equals("Approved")) {
+            notification = "Tiket Anda telah disetujui, silahkan cek email Anda. Terima kasih.";
+        }
+
+        if (ticketDto.getStatus().equals("Rejected")) {
+            notification = "Tiket Anda telah ditolak, silahkan cek email Anda. Terima kasih.";
+        }
+
+        usersService.createNotification(user.getId(), notification);
         ticketsService.saveTicket(ticketDto);
         model.addAttribute("ticket", ticketDto);
 

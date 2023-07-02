@@ -9,7 +9,7 @@ public class NotificationMapper {
                 .id(notification.getId())
                 .userId(notification.getUserId())
                 .notifications(notification.getNotifications())
-                .read(notification.getRead())
+                .createdAt(notification.getCreatedAt())
                 .build();
         return notificationDto;
     }
@@ -19,7 +19,7 @@ public class NotificationMapper {
                 .id(notificationDto.getId())
                 .userId(notificationDto.getUserId())
                 .notifications(notificationDto.getNotifications())
-                .read(notificationDto.getRead())
+                .createdAt(notificationDto.getCreatedAt())
                 .build();
         return notification;
     }

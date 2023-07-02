@@ -1,13 +1,17 @@
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.entity.Favorite;
+import com.umaru.evstats.entity.Notification;
 import com.umaru.evstats.entity.Role;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.mapper.EventMapper;
+import com.umaru.evstats.mapper.NotificationMapper;
 import com.umaru.evstats.mapper.UserMapper;
 import com.umaru.evstats.repository.FavoriteRepository;
+import com.umaru.evstats.repository.NotificationRepository;
 import com.umaru.evstats.repository.RoleRepository;
 import com.umaru.evstats.repository.UserRepository;
 import com.umaru.evstats.util.TbConstants;
@@ -15,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +36,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private FavoriteRepository favoriteRepository;
+
+    @Autowired
+    private NotificationRepository notificationsRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -128,5 +137,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteFavoritedEventByEvent(Long eventId) {
         favoriteRepository.deleteFavoriteByEventId(eventId);
+    }
+
+    @Override
+    public List<NotificationDto> getNotifications(){
+        List<Notification> notifications = notificationsRepository.findAll();
+        List<NotificationDto> notificationDtos = notifications.stream()
+                .map((notification) -> (NotificationMapper.mapToNotificationDto(notification)))
+                .collect(Collectors.toList());
+        return notificationDtos;
+    }
+
+    @Override
+    public void createNotification(Long userId, String notifications) {
+        Notification notification = new Notification();
+        notification.setUserId(userId);
+        notification.setNotifications(notifications);
+
+        NotificationDto notificationDto = NotificationMapper.mapToNotificationDto(notification);
+        notificationsRepository.save(notification);
+    }
+
+    @Override
+    public List<NotificationDto> getNotificationsByUser(Long userId){
+        List<Notification> notifications = notificationsRepository.findAll();
+        List<NotificationDto> notificationDtos = notifications.stream()
+                .map((notification) -> (NotificationMapper.mapToNotificationDto(notification)))
+                .collect(Collectors.toList());
+        if (notificationDtos == null) {
+            NotificationDto notificationDto = new NotificationDto();
+            notificationDto.setUserId(userId);
+            notificationDto.setNotifications("Tidak ada notifikasi");
+            notificationDto.setCreatedAt(new Date());
+            notificationDtos.add(notificationDto);
+            return notificationDtos;
+        }
+        for (NotificationDto notificationDto : notificationDtos) {
+            if (notificationDto.getUserId() != userId) {
+                notificationDtos.remove(notificationDto);
+            }
+        }
+        return notificationDtos;
     }
 }

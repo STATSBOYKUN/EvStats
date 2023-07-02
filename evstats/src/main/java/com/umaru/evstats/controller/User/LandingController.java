@@ -1,5 +1,7 @@
 package com.umaru.evstats.controller.User;
 
+import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,6 +11,8 @@ import org.springframework.ui.ModelMap;
 import com.umaru.evstats.entity.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.List;
 
 @Controller
 @SessionAttributes("name")
@@ -25,6 +29,8 @@ public class LandingController {
     public String home(ModelMap model){
         User user= usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notifications", notificationDtos);
         return "/landing/index";
     }
 

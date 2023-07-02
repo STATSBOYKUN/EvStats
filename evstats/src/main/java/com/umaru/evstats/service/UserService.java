@@ -1,6 +1,7 @@
 package com.umaru.evstats.service;
 
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.dto.UserDto;
 import com.umaru.evstats.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,4 +24,7 @@ public interface UserService {
     public void deleteFavoritedEvent(Long userId, Long eventId);
     public void deleteFavoritedEventByUser(Long userId);
     public void deleteFavoritedEventByEvent(Long eventId);
+    public List<NotificationDto> getNotifications();
+    public void createNotification(Long userId, String notifications);
+    public List<NotificationDto> getNotificationsByUser(Long userId);
 }

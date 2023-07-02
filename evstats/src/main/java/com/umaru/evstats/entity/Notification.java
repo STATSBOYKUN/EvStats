@@ -3,8 +3,11 @@ package com.umaru.evstats.entity;
 import jakarta.persistence.*;
 import jdk.jshell.Snippet;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -23,8 +26,10 @@ public class Notification {
     private Long userId;
 
     @Column(nullable = false)
-    private Long notifications;
+    private String notifications;
 
-    @Column(nullable = false)
-    private Long read;
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date createdAt;
 }

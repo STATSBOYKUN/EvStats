@@ -1,0 +1,88 @@
+<nav
+        class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top"
+>
+    <div class="container-fluid">
+        <ul class="navbar-nav flex-nowrap ms-auto">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <div class="nav-item dropdown no-arrow">
+                    <div
+                            class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
+                    >
+                        <h6 class="dropdown-header">Notifications</h6>
+                        <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="#"
+                        >
+                            <div class="me-3">
+                                <div class="bg-primary icon-circle">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                          <span class="small text-gray-500"
+                          >December 12, 2019</span
+                          >
+                                <p>A new monthly report is ready to download!</p>
+                            </div>
+                        </a
+                        ><a
+                            class="dropdown-item text-center small text-gray-500"
+                            href="#"
+                    >Show All Alerts</a
+                    >
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+                <div
+                        class="shadow dropdown-list dropdown-menu dropdown-menu-end"
+                        aria-labelledby="alertsDropdown"
+                ></div>
+            </li>
+            <div class="d-none d-sm-block topbar-divider"></div>
+            <li class="nav-item dropdown no-arrow">
+                <div class="bg-primary icon-circle nav-item dropdown no-arrow">
+                    <a
+                            class="dropdown-toggle nav-link"
+                            aria-expanded="false"
+                            data-bs-toggle="dropdown"
+                            href="#"
+                    >
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-user"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                        </svg
+                        >
+                    </a>
+                    <div
+                            class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                    >
+                        <a class="dropdown-item" href="#"
+                        ><i
+                                class="fas fa-user fa-sm fa-fw me-2 text-gray-400"
+                        ></i
+                        ><span th:text="'Hi, ' + ${user.username}"></span></a
+                        >
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/logout}"
+                        ><i
+                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"
+                        ></i>Log Out</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

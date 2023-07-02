@@ -2,6 +2,10 @@ package com.umaru.evstats.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,8 +20,8 @@ public class NotificationDto {
     private Long userId;
 
     @NotEmpty(message = "Please enter valid notifications.")
-    private Long notifications;
+    private String notifications;
 
-    @NotEmpty(message = "Please enter valid read.")
-    private Long read;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date createdAt;
 }
