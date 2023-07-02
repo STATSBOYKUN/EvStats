@@ -18,6 +18,15 @@
     <link rel="stylesheet" th:href="@{/css/Simple-Slider.css}" />
     <link rel="stylesheet" th:href="@{/css/Team-icons.css}" />
     <link rel="stylesheet" th:href="@{/css/Team-images.css}" />
+    <script
+            th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
+    ></script>
+    <script
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+    ></script>
+    <script
+            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+    ></script>
   </head>
 
   <body>
@@ -160,9 +169,35 @@
                     color: var(--bs-body-color);
                     text-decoration: underline;
                   "
+                  data-toggle="modal"
+                  data-target="#tutorialModal"
                   >Tutorial Pembayaran</a
                 >
-                <div></div>
+
+                <div
+                        id="tutorialModal"
+                        class="modal fade"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <h6 class="fw-bold" style="text-align: left">
+                          Tutorial Pembayaran
+                        </h6>
+                        <hr>
+                        <p class="text-muted"> 1. Bayar sesuai total pembayaran ke Bank Mandiri(1234567 a.n. Politeknik Statistika STIS)
+                          <br>
+                          2. Foto struk pembayaran dengan jelas <br>
+                          3. Maksimal ukuran foto adalah 25 MB <br>
+                          4. Tunggu Admin untuk memproses tiket <br>
+                          5. Untuk tiket dengan harga 0 maka otomatis tiket di approve</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

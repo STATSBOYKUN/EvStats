@@ -43,25 +43,19 @@
             <!-- Start: Slide Wrapper -->
             <div class="swiper-wrapper">
               <!-- Start: Slide -->
-              <div class="swiper-slide"><img src="" alt="" /></div>
+              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/hanngannas_1.png}" alt="" /></div>
               <!-- End: Slide -->
               <!-- Start: Slide -->
-              <div class="swiper-slide"></div>
+              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/IMG_20190414_113504.jpg}" alt="" /></div>
               <!-- End: Slide -->
               <!-- Start: Slide -->
-              <div class="swiper-slide"></div>
+              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/IMG_20190830_211040_863.jpg}" alt="" /></div>
               <!-- End: Slide -->
             </div>
             <!-- End: Slide Wrapper -->
             <!-- Start: Pagination -->
             <div class="swiper-pagination"></div>
             <!-- End: Pagination -->
-            <!-- Start: Previous -->
-            <div class="swiper-button-prev"></div>
-            <!-- End: Previous -->
-            <!-- Start: Next -->
-            <div class="swiper-button-next"></div>
-            <!-- End: Next -->
           </div>
           <!-- End: Slideshow -->
         </div>
@@ -75,7 +69,7 @@
             <div>
               <img
                 class="rounded img-fluid d-block w-100 fit-cover"
-                style="height: 200px"
+                style="width: 100%;height: auto;"
                 th:src="@{/poster/{posterName}(posterName=${event.poster})}"
               />
               <div class="py-4">
