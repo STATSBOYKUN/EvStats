@@ -1,0 +1,651 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AdminController {
+  + AdminController(): 
+  + dashboard(ModelMap): String
+  + tickets(ModelMap): String
+  + helps(ModelMap): String
+  + events(ModelMap): String
+  + users(ModelMap): String
+   userLogin: String
+}
+class AdminEventsController {
+  + AdminEventsController(): 
+  + storeEvent(ModelMap, EventDto, MultipartFile): RedirectView
+  + favoriteEvent(Long): RedirectView
+  + createEvent(ModelMap): String
+  + deleteFavoritedEvent(Long): RedirectView
+  + deleteEvent(Long): RedirectView
+  + viewEvent(ModelMap, Long): String
+  + editEvent(ModelMap, Long): String
+   userLogin: String
+}
+class AdminHelpController {
+  + AdminHelpController(): 
+  + deleteHelp(Long): RedirectView
+  + viewHelp(ModelMap, Long): String
+  + createHelp(ModelMap, HelpDto): RedirectView
+   userLogin: String
+}
+class AdminTicketController {
+  + AdminTicketController(): 
+  + viewTicket(ModelMap, Long): String
+  + storeTicket(ModelMap, TicketDto, MultipartFile, Long): RedirectView
+  + deleteTicket(Long): RedirectView
+  + editTicket(ModelMap, Long): String
+  + editTicket(ModelMap, TicketDto): RedirectView
+   userLogin: String
+}
+class AdminUsersController {
+  + AdminUsersController(): 
+  + viewUser(ModelMap, Long): String
+  + deleteUser(Long): RedirectView
+  + editUser(ModelMap, Long): String
+  + editTicket(ModelMap, UserDto): RedirectView
+   userLogin: String
+}
+class CustomAuthenticationSuccessHandler {
+  + CustomAuthenticationSuccessHandler(): 
+  + onAuthenticationSuccess(HttpServletRequest, HttpServletResponse, Authentication): void
+}
+class CustomUserDetailsService {
+  + CustomUserDetailsService(): 
+  + loadUserByUsername(String): UserDetails
+}
+class ErrorController {
+  + ErrorController(): 
+  + error(): String
+}
+class EvStatsApplication {
+  + EvStatsApplication(): 
+  + main(String[]): void
+}
+class Event {
+  + Event(Long, String, String, String, String, String, String, LocalDate, LocalTime, Integer, String): 
+  + Event(): 
+  - details: String
+  - date: LocalDate
+  - additionalDetails: String
+  - thumbnail: String
+  - person: String
+  - time: LocalTime
+  - price: Integer
+  - place: String
+  - poster: String
+  - name: String
+  - id: Long
+  + builder(): EventBuilder
+   name: String
+   details: String
+   price: Integer
+   place: String
+   thumbnail: String
+   id: Long
+   person: String
+   date: LocalDate
+   additionalDetails: String
+   time: LocalTime
+   poster: String
+}
+class EventBuilder {
+  ~ EventBuilder(): 
+  + name(String): EventBuilder
+  + id(Long): EventBuilder
+  + thumbnail(String): EventBuilder
+  + details(String): EventBuilder
+  + person(String): EventBuilder
+  + additionalDetails(String): EventBuilder
+  + place(String): EventBuilder
+  + date(LocalDate): EventBuilder
+  + poster(String): EventBuilder
+  + toString(): String
+  + time(LocalTime): EventBuilder
+  + price(Integer): EventBuilder
+  + build(): Event
+}
+class EventDto {
+  + EventDto(Long, String, String, String, String, String, String, LocalDate, LocalTime, Integer, String): 
+  + EventDto(): 
+  - person: String
+  - price: Integer
+  - details: String
+  - name: String
+  - id: Long
+  - additionalDetails: String
+  - date: LocalDate
+  - time: LocalTime
+  - poster: String
+  - thumbnail: String
+  - place: String
+  + builder(): EventDtoBuilder
+   name: String
+   details: String
+   price: Integer
+   place: String
+   thumbnail: String
+   id: Long
+   person: String
+   date: LocalDate
+   additionalDetails: String
+   time: LocalTime
+   poster: String
+}
+class EventDtoBuilder {
+  ~ EventDtoBuilder(): 
+  + name(String): EventDtoBuilder
+  + id(Long): EventDtoBuilder
+  + toString(): String
+  + thumbnail(String): EventDtoBuilder
+  + build(): EventDto
+  + details(String): EventDtoBuilder
+  + person(String): EventDtoBuilder
+  + additionalDetails(String): EventDtoBuilder
+  + place(String): EventDtoBuilder
+  + poster(String): EventDtoBuilder
+  + date(LocalDate): EventDtoBuilder
+  + time(LocalTime): EventDtoBuilder
+  + price(Integer): EventDtoBuilder
+}
+class EventMapper {
+  + EventMapper(): 
+  + mapToFavoriteDto(Favorite): FavoriteDto
+  + mapToEventDto(Event): EventDto
+  + mapToEvent(EventDto): Event
+  + mapToFavorite(FavoriteDto): Favorite
+}
+interface EventRepository << interface >>
+interface EventService << interface >> {
+  + getEvent(Long): EventDto
+  + saveEvents(EventDto, MultipartFile): void
+  + deleteEvent(Long): void
+   events: List<EventDto>
+}
+class EventServiceImpl {
+  + EventServiceImpl(): 
+  + getEvent(Long): EventDto
+  + deleteEvent(Long): void
+  + saveEvents(EventDto, MultipartFile): void
+   events: List<EventDto>
+}
+class EventsController {
+  + EventsController(): 
+  + events(ModelMap, Long): String
+  + eventsFavorite(ModelMap): String
+  + eventsList(ModelMap): String
+  + eventsTickets(ModelMap, Long): String
+   userLogin: String
+}
+class Favorite {
+  + Favorite(Long, Long, Long): 
+  + Favorite(): 
+  - id: Long
+  - userId: Long
+  - eventId: Long
+  + builder(): FavoriteBuilder
+   eventId: Long
+   id: Long
+   userId: Long
+}
+class FavoriteBuilder {
+  ~ FavoriteBuilder(): 
+  + id(Long): FavoriteBuilder
+  + userId(Long): FavoriteBuilder
+  + eventId(Long): FavoriteBuilder
+  + build(): Favorite
+  + toString(): String
+}
+class FavoriteDto {
+  + FavoriteDto(Long, Long, Long): 
+  + FavoriteDto(): 
+  - id: Long
+  - userId: Long
+  - eventId: Long
+  + builder(): FavoriteDtoBuilder
+   eventId: Long
+   id: Long
+   userId: Long
+}
+class FavoriteDtoBuilder {
+  ~ FavoriteDtoBuilder(): 
+  + id(Long): FavoriteDtoBuilder
+  + userId(Long): FavoriteDtoBuilder
+  + eventId(Long): FavoriteDtoBuilder
+  + build(): FavoriteDto
+  + toString(): String
+}
+interface FavoriteRepository << interface >> {
+  + deleteFavoriteByUserId(Long): Favorite
+  + findByUserIdAndEventId(Long, Long): Favorite
+  + deleteFavoriteByEventId(Long): Favorite
+}
+class Help {
+  + Help(Long, String, String, String, Date): 
+  + Help(): 
+  - message: String
+  - name: String
+  - date: Date
+  - email: String
+  - id: Long
+  + builder(): HelpBuilder
+   name: String
+   id: Long
+   email: String
+   message: String
+   date: Date
+}
+class HelpBuilder {
+  ~ HelpBuilder(): 
+  + id(Long): HelpBuilder
+  + name(String): HelpBuilder
+  + email(String): HelpBuilder
+  + message(String): HelpBuilder
+  + date(Date): HelpBuilder
+  + build(): Help
+  + toString(): String
+}
+class HelpDto {
+  + HelpDto(Long, String, String, String, Date): 
+  + HelpDto(): 
+  - id: Long
+  - email: String
+  - date: Date
+  - name: String
+  - message: String
+  + builder(): HelpDtoBuilder
+   name: String
+   id: Long
+   email: String
+   message: String
+   date: Date
+}
+class HelpDtoBuilder {
+  ~ HelpDtoBuilder(): 
+  + id(Long): HelpDtoBuilder
+  + name(String): HelpDtoBuilder
+  + email(String): HelpDtoBuilder
+  + message(String): HelpDtoBuilder
+  + date(Date): HelpDtoBuilder
+  + build(): HelpDto
+  + toString(): String
+}
+class HelpMapper {
+  + HelpMapper(): 
+  + mapToHelpDto(Help): HelpDto
+  + mapToHelp(HelpDto): Help
+}
+interface HelpRepository << interface >>
+class LandingController {
+  + LandingController(): 
+  + home(ModelMap): String
+  + events(ModelMap): String
+  + bantuan(ModelMap): String
+  + komunitas(ModelMap): String
+   userLogin: String
+}
+class LoginController {
+  + LoginController(): 
+  + signup(ModelMap): String
+  + registration(ModelMap, UserDto, BindingResult): String
+  + index(ModelMap): String
+  + error(): String
+   userLogin: String
+}
+class Notification {
+  + Notification(Long, Long, String, Date): 
+  + Notification(): 
+  - id: Long
+  - userId: Long
+  - notifications: String
+  - createdAt: Date
+  + builder(): NotificationBuilder
+   createdAt: Date
+   userId: Long
+   id: Long
+   notifications: String
+}
+class NotificationBuilder {
+  ~ NotificationBuilder(): 
+  + id(Long): NotificationBuilder
+  + userId(Long): NotificationBuilder
+  + notifications(String): NotificationBuilder
+  + createdAt(Date): NotificationBuilder
+  + build(): Notification
+  + toString(): String
+}
+class NotificationDto {
+  + NotificationDto(Long, Long, String, Date): 
+  + NotificationDto(): 
+  - notifications: String
+  - id: Long
+  - userId: Long
+  - createdAt: Date
+  + builder(): NotificationDtoBuilder
+   createdAt: Date
+   userId: Long
+   id: Long
+   notifications: String
+}
+class NotificationDtoBuilder {
+  ~ NotificationDtoBuilder(): 
+  + id(Long): NotificationDtoBuilder
+  + userId(Long): NotificationDtoBuilder
+  + notifications(String): NotificationDtoBuilder
+  + createdAt(Date): NotificationDtoBuilder
+  + build(): NotificationDto
+  + toString(): String
+}
+class NotificationMapper {
+  + NotificationMapper(): 
+  + mapToNotificationDto(Notification): NotificationDto
+  + mapToNotification(NotificationDto): Notification
+}
+interface NotificationRepository << interface >>
+class Role {
+  + Role(Long, String, List<User>): 
+  + Role(): 
+  + Role(String): 
+  - name: String
+  - users: List<User>
+  - id: Long
+   name: String
+   id: Long
+   users: List<User>
+}
+interface RoleRepository << interface >> {
+  + findByName(String): Role
+}
+interface Roles << interface >>
+class SpringSecurityConfig {
+  + SpringSecurityConfig(): 
+  + customAuthenticationSuccessHandler(): CustomAuthenticationSuccessHandler
+  + securityFilterChain(HttpSecurity): SecurityFilterChain
+  + allowUrlEncodedSlashHttpFirewall(): HttpFirewall
+  + passwordEncoder(): PasswordEncoder
+}
+class TbConstants {
+  + TbConstants(): 
+}
+class Ticket {
+  + Ticket(Long, String, String, String, String, Integer, Date, String): 
+  + Ticket(): 
+  - name: String
+  - event: String
+  - tickets: Integer
+  - email: String
+  - status: String
+  - id: Long
+  - invoices: String
+  - date: Date
+  + builder(): TicketBuilder
+   tickets: Integer
+   name: String
+   id: Long
+   email: String
+   event: String
+   invoices: String
+   status: String
+   date: Date
+}
+class TicketBuilder {
+  ~ TicketBuilder(): 
+  + id(Long): TicketBuilder
+  + name(String): TicketBuilder
+  + event(String): TicketBuilder
+  + email(String): TicketBuilder
+  + invoices(String): TicketBuilder
+  + tickets(Integer): TicketBuilder
+  + date(Date): TicketBuilder
+  + status(String): TicketBuilder
+  + build(): Ticket
+  + toString(): String
+}
+class TicketDto {
+  + TicketDto(Long, String, String, String, String, Integer, Date, String): 
+  + TicketDto(): 
+  - tickets: Integer
+  - id: Long
+  - invoices: String
+  - date: Date
+  - event: String
+  - status: String
+  - name: String
+  - email: String
+  + builder(): TicketDtoBuilder
+   tickets: Integer
+   name: String
+   id: Long
+   email: String
+   event: String
+   invoices: String
+   status: String
+   date: Date
+}
+class TicketDtoBuilder {
+  ~ TicketDtoBuilder(): 
+  + id(Long): TicketDtoBuilder
+  + name(String): TicketDtoBuilder
+  + event(String): TicketDtoBuilder
+  + email(String): TicketDtoBuilder
+  + invoices(String): TicketDtoBuilder
+  + tickets(Integer): TicketDtoBuilder
+  + date(Date): TicketDtoBuilder
+  + status(String): TicketDtoBuilder
+  + build(): TicketDto
+  + toString(): String
+}
+class TicketMapper {
+  + TicketMapper(): 
+  + mapToTicketDto(Ticket): TicketDto
+  + mapToTicket(TicketDto): Ticket
+}
+interface TicketRepository << interface >>
+interface TicketService << interface >> {
+  + deleteTicket(Long): void
+  + saveTicket(TicketDto): void
+  + getTicket(Long): TicketDto
+  + saveTickets(TicketDto, MultipartFile): void
+   tickets: List<TicketDto>
+}
+class TicketServiceImpl {
+  + TicketServiceImpl(): 
+  + deleteTicket(Long): void
+  + getTicket(Long): TicketDto
+  + saveTickets(TicketDto, MultipartFile): void
+  + saveTicket(TicketDto): void
+   tickets: List<TicketDto>
+}
+class User {
+  + User(Long, String, String, String, String, String, Integer, Date, Date, List<Role>): 
+  + User(): 
+  + User(String, String, String, String, String, Integer, List<Role>): 
+  - updatedAt: Date
+  - umur: Integer
+  - provinsi: String
+  - username: String
+  - email: String
+  - id: Long
+  - pekerjaan: String
+  - createdAt: Date
+  - roles: List<Role>
+  - password: String
+  + builder(): UserBuilder
+   createdAt: Date
+   pekerjaan: String
+   password: String
+   updatedAt: Date
+   id: Long
+   email: String
+   provinsi: String
+   roles: List<Role>
+   username: String
+   umur: Integer
+}
+class UserBuilder {
+  ~ UserBuilder(): 
+  + id(Long): UserBuilder
+  + username(String): UserBuilder
+  + email(String): UserBuilder
+  + password(String): UserBuilder
+  + provinsi(String): UserBuilder
+  + pekerjaan(String): UserBuilder
+  + umur(Integer): UserBuilder
+  + createdAt(Date): UserBuilder
+  + toString(): String
+  + updatedAt(Date): UserBuilder
+  + build(): User
+  + roles(List<Role>): UserBuilder
+}
+class UserController {
+  + UserController(): 
+  + registrationForm(ModelMap): String
+   userLogin: String
+}
+class UserDto {
+  + UserDto(Long, String, String, String, String, String, Integer, Date, Date): 
+  + UserDto(): 
+  - username: String
+  - pekerjaan: String
+  - id: Long
+  - password: String
+  - provinsi: String
+  - umur: Integer
+  - email: String
+  - updatedAt: Date
+  - createdAt: Date
+  + builder(): UserDtoBuilder
+   createdAt: Date
+   pekerjaan: String
+   password: String
+   updatedAt: Date
+   id: Long
+   email: String
+   provinsi: String
+   username: String
+   umur: Integer
+}
+class UserDtoBuilder {
+  ~ UserDtoBuilder(): 
+  + umur(Integer): UserDtoBuilder
+  + id(Long): UserDtoBuilder
+  + username(String): UserDtoBuilder
+  + email(String): UserDtoBuilder
+  + password(String): UserDtoBuilder
+  + provinsi(String): UserDtoBuilder
+  + pekerjaan(String): UserDtoBuilder
+  + createdAt(Date): UserDtoBuilder
+  + toString(): String
+  + updatedAt(Date): UserDtoBuilder
+  + build(): UserDto
+}
+class UserMapper {
+  + UserMapper(): 
+  + mapToUserDto(User): UserDto
+  + mapToUser(UserDto): User
+}
+interface UserRepository << interface >> {
+  + findByEmail(String): User
+  + findByUsername(String): User
+}
+interface UserService << interface >> {
+  + deleteFavoritedEventByEvent(Long): void
+  + deleteFavoritedEvent(Long, Long): void
+  + saveUser(UserDto): void
+  + getHelp(Long): HelpDto
+  + updateUser(UserDto): void
+  + createNotification(Long, String): void
+  + deleteUser(Long): void
+  + getNotificationsByUser(Long): List<NotificationDto>
+  + saveHelp(HelpDto): void
+  + favoriteEvent(Long, Long): void
+  + getUser(Long): UserDto
+  + deleteFavoritedEventByUser(Long): void
+  + findUserByEmail(String): User
+  + deleteHelp(Long): void
+   users: List<UserDto>
+   helps: List<HelpDto>
+   favoritedEvent: List<FavoriteDto>
+   notifications: List<NotificationDto>
+}
+class UserServiceImpl {
+  + UserServiceImpl(): 
+  + deleteFavoritedEventByEvent(Long): void
+  + deleteFavoritedEventByUser(Long): void
+  + favoriteEvent(Long, Long): void
+  + createNotification(Long, String): void
+  + updateUser(UserDto): void
+  + findUserByEmail(String): User
+  + deleteFavoritedEvent(Long, Long): void
+  + saveUser(UserDto): void
+  + saveHelp(HelpDto): void
+  + deleteHelp(Long): void
+  + getUser(Long): UserDto
+  + deleteUser(Long): void
+  + getNotificationsByUser(Long): List<NotificationDto>
+  + getHelp(Long): HelpDto
+   users: List<UserDto>
+   helps: List<HelpDto>
+   favoritedEvent: List<FavoriteDto>
+   notifications: List<NotificationDto>
+}
+class WebConfig {
+  + WebConfig(): 
+  + addResourceHandlers(ResourceHandlerRegistry): void
+}
+
+AdminController                    "1" *-[#595959,plain]-> "eventsService\n1" EventService                       
+AdminController                    "1" *-[#595959,plain]-> "ticketsService\n1" TicketService                      
+AdminController                    "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+AdminEventsController               -[#595959,dashed]->  EventDto                           : "«create»"
+AdminEventsController              "1" *-[#595959,plain]-> "eventsService\n1" EventService                       
+AdminEventsController              "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+AdminHelpController                "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+AdminTicketController              "1" *-[#595959,plain]-> "eventsService\n1" EventService                       
+AdminTicketController              "1" *-[#595959,plain]-> "ticketsService\n1" TicketService                      
+AdminTicketController              "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+AdminUsersController               "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+CustomAuthenticationSuccessHandler  +-[#820000,plain]-  SpringSecurityConfig               
+CustomUserDetailsService           "1" *-[#595959,plain]-> "userRepository\n1" UserRepository                     
+EventBuilder                        +-[#820000,plain]-  Event                              
+EventDtoBuilder                     +-[#820000,plain]-  EventDto                           
+EventServiceImpl                   "1" *-[#595959,plain]-> "eventsRepository\n1" EventRepository                    
+EventServiceImpl                    -[#008200,dashed]-^  EventService                       
+EventsController                   "1" *-[#595959,plain]-> "eventsService\n1" EventService                       
+EventsController                    -[#595959,dashed]->  TicketDto                          : "«create»"
+EventsController                   "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+FavoriteBuilder                     +-[#820000,plain]-  Favorite                           
+FavoriteDtoBuilder                  +-[#820000,plain]-  FavoriteDto                        
+HelpBuilder                         +-[#820000,plain]-  Help                               
+HelpDtoBuilder                      +-[#820000,plain]-  HelpDto                            
+LandingController                   -[#595959,dashed]->  HelpDto                            : "«create»"
+LandingController                  "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+LoginController                     -[#595959,dashed]->  UserDto                            : "«create»"
+LoginController                    "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+NotificationBuilder                 +-[#820000,plain]-  Notification                       
+NotificationDtoBuilder              +-[#820000,plain]-  NotificationDto                    
+Role                               "1" *-[#595959,plain]-> "users\n*" User                               
+Roles                               +-[#820000,plain]-  TbConstants                        
+SpringSecurityConfig                -[#595959,dashed]->  CustomAuthenticationSuccessHandler : "«create»"
+TicketBuilder                       +-[#820000,plain]-  Ticket                             
+TicketDtoBuilder                    +-[#820000,plain]-  TicketDto                          
+TicketServiceImpl                  "1" *-[#595959,plain]-> "ticketsRepository\n1" TicketRepository                   
+TicketServiceImpl                   -[#008200,dashed]-^  TicketService                      
+User                               "1" *-[#595959,plain]-> "roles\n*" Role                               
+UserBuilder                         +-[#820000,plain]-  User                               
+UserController                     "1" *-[#595959,plain]-> "usersService\n1" UserService                        
+UserDtoBuilder                      +-[#820000,plain]-  UserDto                            
+UserServiceImpl                     -[#595959,dashed]->  Favorite                           : "«create»"
+UserServiceImpl                    "1" *-[#595959,plain]-> "favoriteRepository\n1" FavoriteRepository                 
+UserServiceImpl                    "1" *-[#595959,plain]-> "helpsRepository\n1" HelpRepository                     
+UserServiceImpl                     -[#595959,dashed]->  Notification                       : "«create»"
+UserServiceImpl                     -[#595959,dashed]->  NotificationDto                    : "«create»"
+UserServiceImpl                    "1" *-[#595959,plain]-> "notificationsRepository\n1" NotificationRepository             
+UserServiceImpl                     -[#595959,dashed]->  Role                               : "«create»"
+UserServiceImpl                    "1" *-[#595959,plain]-> "roleRepository\n1" RoleRepository                     
+UserServiceImpl                     -[#595959,dashed]->  User                               : "«create»"
+UserServiceImpl                    "1" *-[#595959,plain]-> "usersRepository\n1" UserRepository                     
+UserServiceImpl                     -[#008200,dashed]-^  UserService                        
+@enduml
