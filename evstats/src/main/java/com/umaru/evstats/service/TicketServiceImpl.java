@@ -56,7 +56,6 @@ public class TicketServiceImpl implements TicketService {
         String invoices = imageFile.getOriginalFilename();
         ticketDto.setInvoices(invoices);
         ticketDto.setStatus("Pending");
-        ticketDto.setEmail("a");
         Ticket ticket = TicketMapper.mapToTicket(ticketDto);
 
         ticketsRepository.save(ticket);

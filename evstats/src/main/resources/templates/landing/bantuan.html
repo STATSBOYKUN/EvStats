@@ -96,11 +96,17 @@
           </div>
           <div class="col-md-6">
             <div>
-              <form class="p-3 p-xl-4" th:action="@{/admin/help/create}" th:object="${help}" method="post" data-bs-theme="light">
+              <form
+                class="p-3 p-xl-4"
+                th:action="@{/admin/help/create}"
+                th:object="${help}"
+                method="post"
+                data-bs-theme="light"
+              >
                 <!-- Start: Success Example -->
                 <div class="mb-3">
                   <input
-                    class="shadow form-control"
+                    class="shadow-sm form-control"
                     type="text"
                     th:field="${help.name}"
                     id="name-1"
@@ -112,7 +118,7 @@
                 <!-- Start: Error Example -->
                 <div class="mb-3">
                   <input
-                    class="shadow form-control"
+                    class="shadow-sm form-control"
                     type="email"
                     th:field="${help.email}"
                     id="email-1"
@@ -123,7 +129,7 @@
                 <!-- End: Error Example -->
                 <div class="mb-3">
                   <textarea
-                    class="shadow form-control"
+                    class="shadow-sm form-control"
                     id="message-1"
                     th:field="${help.message}"
                     name="message"
@@ -179,9 +185,7 @@
                   data-bs-parent="#accordion-1"
                 >
                   <div class="accordion-body">
-                    <p>
-                      Silahkan ikuti tutorial Pembayaran dengan seksama.
-                    </p>
+                    <p>Silahkan ikuti tutorial Pembayaran dengan seksama.</p>
                   </div>
                 </div>
               </div>
@@ -220,7 +224,7 @@
                     aria-expanded="false"
                     aria-controls="accordion-1 .item-3"
                   >
-                   Apa saja keuntungan dari saya mengikuti Event?
+                    Apa saja keuntungan dari saya mengikuti Event?
                   </button>
                 </h2>
                 <div
@@ -230,7 +234,8 @@
                 >
                   <div class="accordion-body">
                     <p class="mb-0">
-                      Tentu, banyak menambah relasi, pengetahuan, dan masih banyak lainnya.
+                      Tentu, banyak menambah relasi, pengetahuan, dan masih
+                      banyak lainnya.
                     </p>
                   </div>
                 </div>

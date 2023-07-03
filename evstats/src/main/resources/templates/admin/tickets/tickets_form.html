@@ -3,7 +3,7 @@
     <h6 style="font-weight: bold">Nama Lengkap</h6>
     <input
       th:field="${ticket.name}"
-      class="form-control"
+      class="shadow-sm form-control"
       type="text"
       name="name"
       readonly
@@ -15,7 +15,7 @@
     <input
       th:field="${ticket.email}"
       type="email"
-      class="form-control"
+      class="shadow-sm form-control"
       name="email"
       readonly
     />
@@ -25,7 +25,7 @@
     <input
       th:field="${ticket.event}"
       type="text"
-      class="form-control"
+      class="shadow-sm form-control"
       name="event"
       readonly
     />
@@ -35,7 +35,7 @@
     <input
       th:field="${ticket.tickets}"
       type="number"
-      class="form-control"
+      class="shadow-sm form-control"
       name="tickets"
       readonly
     />
@@ -44,7 +44,7 @@
     <h6 style="font-weight: bold">Tanggal</h6>
     <input
       th:field="${ticket.date}"
-      class="form-control"
+      class="shadow-sm form-control"
       type="date"
       name="date"
       readonly
@@ -55,7 +55,7 @@
     <select
       type="text"
       th:value="${ticket.status}"
-      class="form-control"
+      class="shadow-sm form-control"
       name="status"
       required
     >
@@ -69,7 +69,7 @@
     <input th:field="${ticket.invoices}" type="hidden" name="invoices" />
     <a
       href="#"
-      class="form-control"
+      class="shadow-sm form-control"
       style="color: var(--bs-body-color); font-weight: bold"
       data-toggle="modal"
       data-target="#imageModal"

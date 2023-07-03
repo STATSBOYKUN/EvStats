@@ -66,6 +66,7 @@ public class AdminTicketController {
             usersService.createNotification(user.getId(), notification);
             EventDto event = eventsService.getEvent(eventId);
             ticketDto.setEvent(event.getName());
+            ticketDto.setEmail(user.getEmail());
             ticketsService.saveTickets(ticketDto, imageFile);
         } catch (IOException e) {
             e.printStackTrace();

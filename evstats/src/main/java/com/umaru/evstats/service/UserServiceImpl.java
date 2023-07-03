@@ -162,7 +162,10 @@ public class UserServiceImpl implements UserService {
         List<NotificationDto> notificationDtos = notifications.stream()
                 .map((notification) -> (NotificationMapper.mapToNotificationDto(notification)))
                 .collect(Collectors.toList());
-        if (notificationDtos == null) {
+        if (!notificationDtos.isEmpty()) {
+            notificationDtos.removeIf(notificationDto -> !notificationDto.getUserId().equals(userId));
+            return notificationDtos;
+        } else {
             NotificationDto notificationDto = new NotificationDto();
             notificationDto.setUserId(userId);
             notificationDto.setNotifications("Tidak ada notifikasi");
@@ -170,12 +173,6 @@ public class UserServiceImpl implements UserService {
             notificationDtos.add(notificationDto);
             return notificationDtos;
         }
-        for (NotificationDto notificationDto : notificationDtos) {
-            if (notificationDto.getUserId() != userId) {
-                notificationDtos.remove(notificationDto);
-            }
-        }
-        return notificationDtos;
     }
 
     @Override

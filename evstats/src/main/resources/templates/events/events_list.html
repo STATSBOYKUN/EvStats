@@ -43,13 +43,31 @@
             <!-- Start: Slide Wrapper -->
             <div class="swiper-wrapper">
               <!-- Start: Slide -->
-              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/hanngannas_1.png}" alt="" /></div>
+              <div class="swiper-slide">
+                <img
+                  style="width: 100%"
+                  th:src="@{/poster/hanngannas_1.png}"
+                  alt=""
+                />
+              </div>
               <!-- End: Slide -->
               <!-- Start: Slide -->
-              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/IMG_20190414_113504.jpg}" alt="" /></div>
+              <div class="swiper-slide">
+                <img
+                  style="width: 100%"
+                  th:src="@{/poster/IMG_20190414_113504.jpg}"
+                  alt=""
+                />
+              </div>
               <!-- End: Slide -->
               <!-- Start: Slide -->
-              <div class="swiper-slide"><img style="width: 100%;" th:src="@{/poster/IMG_20190830_211040_863.jpg}" alt="" /></div>
+              <div class="swiper-slide">
+                <img
+                  style="width: 100%"
+                  th:src="@{/poster/IMG_20190830_211040_863.jpg}"
+                  alt=""
+                />
+              </div>
               <!-- End: Slide -->
             </div>
             <!-- End: Slide Wrapper -->
@@ -69,7 +87,7 @@
             <div>
               <img
                 class="rounded img-fluid d-block w-100 fit-cover"
-                style="width: 100%;height: auto;"
+                style="width: 100%; height: auto"
                 th:src="@{/poster/{posterName}(posterName=${event.poster})}"
               />
               <div class="py-4">

@@ -2,6 +2,7 @@ package com.umaru.evstats.controller.user;
 
 import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.FavoriteDto;
+import com.umaru.evstats.dto.NotificationDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
@@ -49,6 +50,9 @@ public class EventsController {
         model.addAttribute("event", event);
         model.addAttribute("favoritedEvent", favoritedEvents);
         model.addAttribute("favorited", favorited);
+
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         return "/events/events_details";
     }
 
@@ -58,6 +62,8 @@ public class EventsController {
         model.put("user", user);
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         return "/events/events_list";
     }
 
@@ -77,6 +83,8 @@ public class EventsController {
         model.put("user", user);
         List<EventDto> events = new ArrayList<>();
         List<FavoriteDto> favoritedEvents = usersService.getFavoritedEvent();
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         for (FavoriteDto favorite : favoritedEvents) {
             if (favorite.getUserId().equals(user.getId())) {
                 events.add(eventsService.getEvent(favorite.getEventId()));

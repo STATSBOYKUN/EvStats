@@ -12,10 +12,17 @@
     <link rel="stylesheet" th:href="@{/css/Nunito.css}" />
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}" />
     <link rel="stylesheet" th:href="@{/css/untitled.css}" />
-    <link rel="stylesheet" th:href="@{https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css}" />
+    <link
+      rel="stylesheet"
+      th:href="@{https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css}"
+    />
     <script th:src="@{https://code.jquery.com/jquery-3.7.0.js}"></script>
-    <script th:src="@{https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js}"></script>
+    <script
+      th:src="@{https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js}"
+    ></script>
+    <script
+      th:src="@{https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js}"
+    ></script>
   </head>
 
   <body id="page-top">
@@ -45,8 +52,11 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="table-responsive table mt-2" role="grid"
-                     aria-describedby="dataTable_info">
+                <div
+                  class="table-responsive table mt-2"
+                  role="grid"
+                  aria-describedby="dataTable_info"
+                >
                   <table class="table my-0" id="dataTable">
                     <thead>
                       <tr>
@@ -94,8 +104,8 @@
                     </tbody>
                   </table>
                   <script>
-                    $(document).ready(function() {
-                      $('#dataTable').DataTable();
+                    $(document).ready(function () {
+                      $("#dataTable").DataTable();
                     });
                   </script>
                 </div>

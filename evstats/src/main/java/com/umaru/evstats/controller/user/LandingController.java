@@ -31,7 +31,7 @@ public class LandingController {
         User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
-        model.addAttribute("notifications", notificationDtos);
+        model.addAttribute("notificationsList", notificationDtos);
         return "/landing/index";
     }
 
@@ -39,6 +39,8 @@ public class LandingController {
     public String events(ModelMap model) {
         User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         return "/landing/events";
     }
 
@@ -46,6 +48,8 @@ public class LandingController {
     public String komunitas(ModelMap model) {
         User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         return "/landing/komunitas";
     }
 
@@ -53,6 +57,8 @@ public class LandingController {
     public String bantuan(ModelMap model) {
         User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
+        List<NotificationDto> notificationDtos = usersService.getNotificationsByUser(user.getId());
+        model.addAttribute("notificationsList", notificationDtos);
         model.addAttribute("help", new HelpDto());
         return "/landing/bantuan";
     }

@@ -19,13 +19,13 @@
     <link rel="stylesheet" th:href="@{/css/Team-icons.css}" />
     <link rel="stylesheet" th:href="@{/css/Team-images.css}" />
     <script
-            th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
+      th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
     ></script>
     <script
-            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+      th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
     ></script>
     <script
-            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+      th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
     ></script>
   </head>
 
@@ -40,7 +40,10 @@
       >
         <div class="container py-5">
           <div class="row">
-            <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <div
+              style="width: 550px"
+              class="col-md-8 col-xl-6 text-center mx-auto"
+            >
               <h2 class="display-6 fw-bold mb-4">
                 Tiket :&nbsp;<span
                   class="underline"
@@ -48,19 +51,25 @@
                 ></span>
               </h2>
               <p class="text-muted">
-                Time left: <span style="font-weight: bold" id="minutes"></span> : <span style="font-weight: bold" id="seconds"></span>
+                Time left:
+                <span style="font-weight: bold" id="minutes"></span> :
+                <span style="font-weight: bold" id="seconds"></span>
               </p>
 
               <script>
-                var countdownDuration = 8 * 60 * 50; // 8 minutes
+                var countdownDuration = 8 * 60 * 1000;
 
-                var minutesElement = document.getElementById('minutes');
-                var secondsElement = document.getElementById('seconds');
+                var minutesElement = document.getElementById("minutes");
+                var secondsElement = document.getElementById("seconds");
 
                 var countdownInterval = setInterval(updateCountdown, 1000);
                 function updateCountdown() {
-                  var minutes = Math.floor((countdownDuration % (1000 * 60 * 60)) / (1000 * 60));
-                  var seconds = Math.floor((countdownDuration % (1000 * 60)) / 1000);
+                  var minutes = Math.floor(
+                    (countdownDuration % (1000 * 60 * 60)) / (1000 * 60)
+                  );
+                  var seconds = Math.floor(
+                    (countdownDuration % (1000 * 60)) / 1000
+                  );
 
                   minutesElement.textContent = formatTime(minutes);
                   secondsElement.textContent = formatTime(seconds);
@@ -69,12 +78,12 @@
 
                   if (countdownDuration < 0) {
                     clearInterval(countdownInterval);
-                    alert('Waktu pemesanan tiket sudah habis.');
-                    window.location.href = '/events/list';
+                    alert("Waktu pemesanan tiket sudah habis.");
+                    window.location.href = "/events/list";
                   }
                 }
                 function formatTime(time) {
-                  return time < 10 ? '0' + time : time;
+                  return time < 10 ? "0" + time : time;
                 }
               </script>
             </div>
@@ -153,7 +162,7 @@
                 <div class="mb-3">
                   <input
                     th:field="${ticket.name}"
-                    class="shadow form-control"
+                    class="shadow-sm form-control"
                     type="text"
                     name="name"
                     placeholder="Full Name"
@@ -185,7 +194,7 @@
                   Bukti Pembayaran
                 </h6>
                 <input
-                  class="form-control"
+                  class="shadow-sm form-control"
                   type="file"
                   name="imageFile"
                   style="margin-bottom: 15px"
@@ -202,11 +211,11 @@
                 >
 
                 <div
-                        id="tutorialModal"
-                        class="modal fade"
-                        tabindex="-1"
-                        role="dialog"
-                        aria-hidden="true"
+                  id="tutorialModal"
+                  class="modal fade"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-hidden="true"
                 >
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -214,13 +223,17 @@
                         <h6 class="fw-bold" style="text-align: left">
                           Tutorial Pembayaran
                         </h6>
-                        <hr>
-                        <p class="text-muted"> 1. Bayar sesuai total pembayaran ke Bank Mandiri(1234567 a.n. Politeknik Statistika STIS)
-                          <br>
-                          2. Foto struk pembayaran dengan jelas <br>
-                          3. Maksimal ukuran foto adalah 25 MB <br>
-                          4. Tunggu Admin untuk memproses tiket <br>
-                          5. Untuk tiket dengan harga 0 maka otomatis tiket di approve</p>
+                        <hr />
+                        <p class="text-muted">
+                          1. Bayar sesuai total pembayaran ke Bank
+                          Mandiri(1234567 a.n. Politeknik Statistika STIS)
+                          <br />
+                          2. Foto struk pembayaran dengan jelas <br />
+                          3. Maksimal ukuran foto adalah 25 MB <br />
+                          4. Tunggu Admin untuk memproses tiket <br />
+                          5. Untuk tiket dengan harga 0 maka otomatis tiket di
+                          approve
+                        </p>
                       </div>
                     </div>
                   </div>

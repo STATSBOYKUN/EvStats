@@ -12,7 +12,9 @@
     <link rel="stylesheet" th:href="@{/css/Nunito.css}" />
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}" />
     <link rel="stylesheet" th:href="@{/css/untitled.css}" />
-    <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js}"></script>
+    <script
+      th:src="@{https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js}"
+    ></script>
   </head>
 
   <body
@@ -131,13 +133,13 @@
                   <div
                     class="card-header d-flex justify-content-between align-items-center"
                   >
-                    <h6 class="text-primary fw-bold m-0">Rangkuman Pendapatan</h6>
+                    <h6 class="text-primary fw-bold m-0">
+                      Rangkuman Pendapatan
+                    </h6>
                   </div>
                   <div class="card-body">
                     <div class="chart-area">
-                      <canvas
-                        id="lineChart"
-                      ></canvas>
+                      <canvas id="lineChart"></canvas>
                       <script type="text/javascript" th:inline="javascript">
                         var earningTicket = [[${earningTicket}]];
                         var ticketDate = [[${ticketDate}]];
@@ -224,9 +226,7 @@
                   </div>
                   <div class="card-body">
                     <div class="chart-area">
-                      <canvas
-                        id="doughnutChart"
-                      ></canvas>
+                      <canvas id="doughnutChart"></canvas>
                       <script type="text/javascript" th:inline="javascript">
                         var ticketData = [[${ticketData}]];
 
