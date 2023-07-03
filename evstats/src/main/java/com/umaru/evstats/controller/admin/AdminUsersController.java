@@ -1,4 +1,4 @@
-package com.umaru.evstats.controller.Admin;
+package com.umaru.evstats.controller.admin;
 
 import com.umaru.evstats.dto.FavoriteDto;
 import com.umaru.evstats.dto.UserDto;

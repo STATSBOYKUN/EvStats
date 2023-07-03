@@ -1,4 +1,4 @@
-package com.umaru.evstats.controller.User;
+package com.umaru.evstats.controller.user;
 
 import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.NotificationDto;
