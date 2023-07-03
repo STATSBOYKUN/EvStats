@@ -1,18 +1,14 @@
 package com.umaru.evstats.config;
 
 import com.umaru.evstats.repository.UserRepository;
-import com.umaru.evstats.service.UserService;
-import com.umaru.evstats.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,7 +52,7 @@ public class SpringSecurityConfig {
                         .requestMatchers("/events/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/komunitas/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/bantuan/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/admin/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/admin/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/static/**").permitAll()
                         .anyRequest().authenticated()
                 )
