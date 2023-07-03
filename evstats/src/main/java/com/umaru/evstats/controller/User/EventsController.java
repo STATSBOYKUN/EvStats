@@ -3,9 +3,9 @@ package com.umaru.evstats.controller.User;
 import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.FavoriteDto;
 import com.umaru.evstats.dto.TicketDto;
+import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.UserService;
-import com.umaru.evstats.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @SessionAttributes("name")
@@ -35,8 +34,8 @@ public class EventsController {
     }
 
     @GetMapping("/events/{eventId}")
-    public String events(ModelMap model, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String events(ModelMap model, @PathVariable Long eventId) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         List<FavoriteDto> favoritedEvents = usersService.getFavoritedEvent();
@@ -54,8 +53,8 @@ public class EventsController {
     }
 
     @GetMapping("/events/list")
-    public String eventsList(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String eventsList(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);
@@ -63,8 +62,8 @@ public class EventsController {
     }
 
     @GetMapping("/events/tickets/{eventId}")
-    public String eventsTickets(ModelMap model, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String eventsTickets(ModelMap model, @PathVariable Long eventId) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         model.addAttribute("ticket", new TicketDto());
@@ -73,8 +72,8 @@ public class EventsController {
     }
 
     @GetMapping("/events/favorite")
-    public String eventsFavorite(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String eventsFavorite(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<EventDto> events = new ArrayList<>();
         List<FavoriteDto> favoritedEvents = usersService.getFavoritedEvent();

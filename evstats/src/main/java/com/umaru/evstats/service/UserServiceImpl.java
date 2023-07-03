@@ -15,11 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Calendar;
-import java.text.DateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -141,7 +138,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NotificationDto> getNotifications(){
+    public List<NotificationDto> getNotifications() {
         List<Notification> notifications = notificationsRepository.findAll();
         List<NotificationDto> notificationDtos = notifications.stream()
                 .map((notification) -> (NotificationMapper.mapToNotificationDto(notification)))
@@ -160,7 +157,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NotificationDto> getNotificationsByUser(Long userId){
+    public List<NotificationDto> getNotificationsByUser(Long userId) {
         List<Notification> notifications = notificationsRepository.findAll();
         List<NotificationDto> notificationDtos = notifications.stream()
                 .map((notification) -> (NotificationMapper.mapToNotificationDto(notification)))
@@ -182,7 +179,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<HelpDto> getHelps(){
+    public List<HelpDto> getHelps() {
         List<Help> helps = helpsRepository.findAll();
         List<HelpDto> helpDtos = helps.stream()
                 .map((help) -> (HelpMapper.mapToHelpDto(help)))

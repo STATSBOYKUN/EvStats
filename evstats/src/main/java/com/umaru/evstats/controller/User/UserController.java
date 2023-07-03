@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
@@ -25,7 +24,7 @@ public class UserController {
 
     @GetMapping("/")
     public String registrationForm(ModelMap model) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         return "/landing/index";
     }

@@ -10,6 +10,8 @@ public interface EventService {
     public List<EventDto> getEvents();
 
     public EventDto getEvent(Long eventId);
+
     public void deleteEvent(Long eventId);
+
     public void saveEvents(EventDto eventDto, MultipartFile imageFile) throws IOException;
 }

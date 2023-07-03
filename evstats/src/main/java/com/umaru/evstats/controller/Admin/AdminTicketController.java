@@ -1,9 +1,8 @@
 package com.umaru.evstats.controller.Admin;
 
-import com.umaru.evstats.entity.User;
-
 import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.TicketDto;
+import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
 import com.umaru.evstats.service.UserService;
@@ -38,7 +37,7 @@ public class AdminTicketController {
 
     @GetMapping("/admin/tickets/{ticketId}")
     public String viewTicket(ModelMap model, @PathVariable Long ticketId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         model.addAttribute("ticket", ticket);
@@ -47,7 +46,7 @@ public class AdminTicketController {
 
     @GetMapping("/admin/tickets/{ticketId}/edit")
     public String editTicket(ModelMap model, @PathVariable Long ticketId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         TicketDto ticket = ticketsService.getTicket(ticketId);
         if (ticket == null) {
@@ -59,8 +58,8 @@ public class AdminTicketController {
     }
 
     @RequestMapping(value = "/admin/tickets/create/{eventId}", method = RequestMethod.POST)
-    public RedirectView storeTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public RedirectView storeTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         try {
             String notification = "Tiket Anda sedang diproses, terus pantau notifikasi. Terima kasih.";
@@ -76,8 +75,8 @@ public class AdminTicketController {
     }
 
     @RequestMapping(value = "/admin/tickets/edit", method = RequestMethod.POST)
-    public RedirectView editTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public RedirectView editTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         String notification = "";
 

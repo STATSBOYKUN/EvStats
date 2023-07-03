@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String index(ModelMap model){
+    public String index(ModelMap model) {
         String username = getUserLogin();
 
         model.put("name", username);
@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @GetMapping("/signup")
-    public String signup(ModelMap model){
+    public String signup(ModelMap model) {
         List<String> pekerjaan = List.of("Mahasiswa Non-STIS", "Mahasiswa STIS", "Dosen", "Lainnya");
         List<String> provinsi = List.of("Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "Jambi", "Bengkulu", "Sumatera Selatan", "Kepulauan Bangka Belitung", "Lampung", "Banten", "Jawa Barat", "DKI Jakarta", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Gorontalo", "Sulawesi Barat", "Maluku", "Maluku Utara", "Papua Barat", "Papua");
         model.addAttribute("pekerjaan", pekerjaan);
@@ -48,9 +48,10 @@ public class LoginController {
     }
 
     @GetMapping("/error")
-    public String error(){
+    public String error() {
         return "/other/error";
     }
+
     @PostMapping("/signup")
     public String registration(ModelMap model,
                                @Valid @ModelAttribute("user") UserDto userDto,

@@ -1,11 +1,7 @@
 package com.umaru.evstats.entity;
 
 import jakarta.persistence.*;
-import jdk.jshell.Snippet;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

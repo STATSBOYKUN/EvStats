@@ -4,7 +4,6 @@ import com.umaru.evstats.dto.EventDto;
 import com.umaru.evstats.dto.HelpDto;
 import com.umaru.evstats.dto.TicketDto;
 import com.umaru.evstats.dto.UserDto;
-import com.umaru.evstats.entity.Event;
 import com.umaru.evstats.entity.User;
 import com.umaru.evstats.service.EventService;
 import com.umaru.evstats.service.TicketService;
@@ -14,13 +13,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.DecimalFormat;
 
 @Controller
 @SessionAttributes("name")
@@ -41,8 +40,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/dashboard")
-    public String dashboard(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String dashboard(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<Integer> earningTicket = new ArrayList<>();
 
@@ -68,7 +67,7 @@ public class AdminController {
 
         model.addAttribute("ticketDate", ticketDate);
 
-        List<Integer> ticketData= new ArrayList<>();
+        List<Integer> ticketData = new ArrayList<>();
         int ticketApproved = 0;
         int ticketPending = 0;
         int ticketRejected = 0;
@@ -97,7 +96,7 @@ public class AdminController {
         }
         model.addAttribute("jumlahTicket", jumlahTicket);
 
-        double targetUser = usersService.getUsers().size()/250;
+        double targetUser = usersService.getUsers().size() / 250;
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         model.addAttribute("targetUser", decimalFormat.format(targetUser));
 
@@ -105,8 +104,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/tickets")
-    public String tickets(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String tickets(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<TicketDto> tickets = ticketsService.getTickets();
         model.addAttribute("tickets", tickets);
@@ -114,8 +113,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/users")
-    public String users(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String users(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<UserDto> users = usersService.getUsers();
         model.addAttribute("users", users);
@@ -123,8 +122,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/events")
-    public String events(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String events(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<EventDto> events = eventsService.getEvents();
         model.addAttribute("events", events);
@@ -132,8 +131,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/helps")
-    public String helps(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String helps(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         List<HelpDto> helps = usersService.getHelps();
         model.addAttribute("helps", helps);

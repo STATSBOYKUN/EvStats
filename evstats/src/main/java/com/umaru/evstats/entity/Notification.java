@@ -1,14 +1,11 @@
 package com.umaru.evstats.entity;
 
 import jakarta.persistence.*;
-import jdk.jshell.Snippet;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

@@ -34,7 +34,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketDto getTicket(Long ticketId) {
         Optional<Ticket> tickets = ticketsRepository.findById(ticketId);
-        if (tickets.isPresent()){
+        if (tickets.isPresent()) {
             return TicketMapper.mapToTicketDto(tickets.get());
         } else {
             return null;

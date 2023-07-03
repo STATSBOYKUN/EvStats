@@ -22,6 +22,7 @@ public class EventMapper {
                 .build();
         return eventDto;
     }
+
     public static Event mapToEvent(EventDto eventDto) {
         Event event = Event.builder()
                 .id(eventDto.getId())

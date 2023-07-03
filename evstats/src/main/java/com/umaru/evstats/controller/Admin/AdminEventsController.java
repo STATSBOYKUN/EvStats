@@ -33,8 +33,8 @@ public class AdminEventsController {
     }
 
     @GetMapping("/admin/events/create")
-    public String createEvent(ModelMap model){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public String createEvent(ModelMap model) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.addAttribute("event", new EventDto());
         model.put("user", user);
         return "/admin/events/events_create";
@@ -42,7 +42,7 @@ public class AdminEventsController {
 
     @GetMapping("/admin/events/{eventId}")
     public String viewEvent(ModelMap model, @PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         model.addAttribute("event", event);
@@ -51,7 +51,7 @@ public class AdminEventsController {
 
     @GetMapping("/admin/events/{eventId}/edit")
     public String editEvent(ModelMap model, @PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         EventDto event = eventsService.getEvent(eventId);
         if (event == null) {
@@ -63,8 +63,8 @@ public class AdminEventsController {
     }
 
     @RequestMapping(value = "/admin/events/create", method = RequestMethod.POST)
-    public RedirectView storeEvent(ModelMap model, @ModelAttribute("event") EventDto eventDto, @RequestParam("imageFile") MultipartFile imageFile){
-        User user= usersService.findUserByEmail(getUserLogin());
+    public RedirectView storeEvent(ModelMap model, @ModelAttribute("event") EventDto eventDto, @RequestParam("imageFile") MultipartFile imageFile) {
+        User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         model.addAttribute("event", eventDto);
         try {
@@ -91,7 +91,7 @@ public class AdminEventsController {
 
     @RequestMapping(value = "/events/favorite/{eventId}/create", method = RequestMethod.POST)
     public RedirectView favoriteEvent(@PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
 
         usersService.favoriteEvent(user.getId(), eventId);
         return new RedirectView("/events/" + eventId.toString());
@@ -99,7 +99,7 @@ public class AdminEventsController {
 
     @RequestMapping(value = "/events/favorite/{eventId}/delete", method = RequestMethod.POST)
     public RedirectView deleteFavoritedEvent(@PathVariable Long eventId) {
-        User user= usersService.findUserByEmail(getUserLogin());
+        User user = usersService.findUserByEmail(getUserLogin());
         usersService.deleteFavoritedEvent(user.getId(), eventId);
         return new RedirectView("/events/" + eventId.toString());
     }

@@ -21,13 +21,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String username;
-    
+
     @Column(nullable = false, unique = true)
     private String email;
-    
+
     @Column(nullable = false)
     private String password;
 
@@ -49,7 +49,7 @@ public class User {
     @UpdateTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date updatedAt;
-    
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "users_roles",
@@ -59,7 +59,7 @@ public class User {
 
     private List<Role> roles = new ArrayList<>();
 
-    public User(String username, String email, String password, String provinsi, String pekerjaan, Integer umur,  List<Role> roles) {
+    public User(String username, String email, String password, String provinsi, String pekerjaan, Integer umur, List<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -71,5 +71,5 @@ public class User {
         } else {
             this.roles = new ArrayList<>();
         }
-    }   
+    }
 }

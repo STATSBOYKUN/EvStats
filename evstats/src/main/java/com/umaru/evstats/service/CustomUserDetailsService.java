@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -22,8 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(user.getEmail()
                     , user.getPassword(), user.getRoles().stream()
-                            .map((role) -> new SimpleGrantedAuthority(role.getName()))
-                            .collect(Collectors.toList()));
+                    .map((role) -> new SimpleGrantedAuthority(role.getName()))
+                    .collect(Collectors.toList()));
         } else {
             throw new UsernameNotFoundException("Invalid email or password");
         }

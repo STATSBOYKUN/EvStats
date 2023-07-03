@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
     public EventDto getEvent(Long eventId) {
         Optional<Event> events = eventsRepository.findById(eventId);
 
-        if (events.isPresent()){
+        if (events.isPresent()) {
             return EventMapper.mapToEventDto(events.get());
         } else {
             return null;
@@ -48,7 +48,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEvents(EventDto eventDto, MultipartFile imageFile) throws IOException{
+    public void saveEvents(EventDto eventDto, MultipartFile imageFile) throws IOException {
         String folder = "src/main/resources/static/poster/";
         byte[] bytes = imageFile.getBytes();
         Path path = Paths.get(folder + imageFile.getOriginalFilename()).toAbsolutePath();

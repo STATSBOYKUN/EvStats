@@ -10,7 +10,10 @@ public interface TicketService {
     public List<TicketDto> getTickets();
 
     public TicketDto getTicket(Long ticketId);
+
     public void deleteTicket(Long ticketId);
+
     public void saveTickets(TicketDto ticketDto, MultipartFile imageFile) throws IOException;
+
     public void saveTicket(TicketDto ticketDto);
 }

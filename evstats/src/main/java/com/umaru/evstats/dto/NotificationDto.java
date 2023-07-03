@@ -2,7 +2,6 @@ package com.umaru.evstats.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
