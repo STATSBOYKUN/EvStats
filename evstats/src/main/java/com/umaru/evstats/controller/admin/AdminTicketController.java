@@ -58,7 +58,10 @@ public class AdminTicketController {
     }
 
     @RequestMapping(value = "/admin/tickets/create/{eventId}", method = RequestMethod.POST)
-    public RedirectView storeTicket(ModelMap model, @ModelAttribute("ticket") TicketDto ticketDto, @RequestParam("imageFile") MultipartFile imageFile, @PathVariable Long eventId) {
+    public RedirectView storeTicket(ModelMap model,
+                                    @ModelAttribute("ticket") TicketDto ticketDto,
+                                    @RequestParam("imageFile") MultipartFile imageFile,
+                                    @PathVariable Long eventId) {
         User user = usersService.findUserByEmail(getUserLogin());
         model.put("user", user);
         try {
